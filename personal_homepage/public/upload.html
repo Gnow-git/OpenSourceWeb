@@ -37,8 +37,6 @@
     </div>
   </nav>
 
-  <div class="container mt-3">
-
   </div>
 
 <!--firebase용 코드 시작-->
@@ -70,28 +68,59 @@
 <!--jQuery-->
 <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 
-<!--게시글 레이아웃-->
+  <!--업로드-->
+  <div class="container mt-3">
+    <input type="text" class="form-control mt-2" id="title" placeholder="title">
+    <textarea class="form-control mt-2" id="content">content</textarea>
+    <input type="text" class="form-control mt-2" id="price" placeholder="price">
+    <input class="form-control mt-2" type="file" id="image">
+    <button class="btn btn-danger mt-3" id="send">올리기</button>
+  </div>
+
+<!--업로드 기능 구현-->
 <script>
-  
-  const db = firebase.firestore();
-  db.collection('product').get().then((snapshot)=>{
-    snapshot.forEach((doc)=>{
-      const timestamp = doc.data().날짜;
-      const date = timestamp.toDate();
-      const formattedDate = `${date.getFullYear()}년 ${date.getMonth()+1}월 ${date.getDate()}일`;
-      console.log(doc.data()) // 데이터만 출력
-      var layout = `<div class="product">
-        <div class="thumbnail" style="background-image: url(${doc.data().이미지})"></div>
-        <div class="flex-grow-1 p-4">
-          <h5 class="title">${doc.data().음식명}</h5>
-          <p class="date">${formattedDate}</p>
-          <p class="price">${doc.data().가격}원</p>
-          <p class="float-end">♥0</p>
-        </div>
-      </div>`;
-      $('.container').append(layout)
+    const db = firebase.firestore();
+    const storage = firebase.storage();
+
+    $('#send').click(function(){
+
+        // 저장 경로 지정
+        var file = document.querySelector('#image').files[0];   // 파일 확인
+        var storageRef = storage.ref();
+        var savepath = storageRef.child('image/' + file.name);
+        var upload_op = savepath.put(file)
+
+        upload_op.on( 'state_changed', 
+            // 변화시 동작하는 함수 
+            null, 
+            //에러시 동작하는 함수
+            (error) => {
+                console.error('실패사유는', error);
+            }, 
+            // 성공시 동작하는 함수
+            () => {
+                upload_op.snapshot.ref.getDownloadURL().then((url) => {
+                    console.log('업로드된 경로는', url);    // url 가져오는 함수
+
+                    // 내용 입력
+                    var inputdata = {
+                        음식명 : $('#title').val(),
+                        가격 : Number($('#price').val()),
+                        내용 : $('#content').val(),
+                        날짜 : new Date(),
+                        이미지 : url
+                    }
+                    db.collection('product').add(inputdata).then((result)=>{
+                        console.log(result);    // 성공시 담겨오는 정보
+                        window.location.href="/index.html"  // 성공시 index.html로 이동
+                    }).catch((err)=>{
+                        console.log(err)    // 실패할 경우 에러 확인
+                    })
+                });
+            }
+        );
     })
-  })
+    
 </script>
 
 </body>
