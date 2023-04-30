@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="key.js"></script>
+  <!--bootstrap-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="\main.css">
+</head>
+
+<body>
+<!--firebase용 코드 시작-->
+<script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
+
+<script>
+var firebaseConfig = {
+    apiKey: firebase_Key,
+    authDomain: firebase_authDomain,
+    projectId: firebase_projectId,
+    storageBucket: firebase_storageBucket,
+    messagingSenderId: firebase_messagingSenderId,
+    appId: firebase_appId,
+    measurementId: firebase_measurementId
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+</script>
+<!--firebase용 코드 끝-->
+
+<!--bootstrap-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+<!--jQuery-->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Pricing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    상세페이지
+    <div class="detail-pic my-4" style="background-image: url('https://placeimg.com/640/380/tech');"></div>
+    <div>
+      <h5>올린사람 : 모름</h5>
+      <hr>
+      <h5 class="title">상품명</h5>
+      <p class="date">올린날짜</p>
+      <p class="price">가격</p>
+    </div>
+</div>
+
+<script>
+    const db = firebase.firestore();
+    const storage = firebase.storage();
+
+    var querystring = new URLSearchParams(window.location.search) // 쿼리스트링 문자열 -> 오브젝트로 변환
+
+    db.collection('product').doc(querystring.get('id')).get().then((result)=>{
+      console.log(result.data())
+    })
+
+
+</script>
+
+</body>
+</html>
