@@ -71,7 +71,7 @@ firebase.initializeApp(firebaseConfig);
     <button id="edit">수정</button>
     <div class="detail-pic my-4" style="background-image: url('https://placeimg.com/640/380/tech');"></div>
     <div>
-      <h5>올린사람 : 모름</h5>
+      <h5 class="author">올린사람</h5>
       <hr>
       <h5 class="title">음식명</h5>
       <p class="date">올린날짜</p>
@@ -87,8 +87,9 @@ firebase.initializeApp(firebaseConfig);
 
     db.collection('product').doc(querystring.get('id')).get().then((result)=>{
       console.log(result.data())
+      $('.author').html('올린사람 : ' + result.data().이름)
       $('.title').html(result.data().음식명)
-      $('.price').html(result.data().가격)
+      $('.price').html(result.data().가격 + '원')
       $('.detail-pic').css('background-image', `url(${result.data().이미지})`)
     })
 
