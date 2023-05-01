@@ -68,7 +68,6 @@ firebase.initializeApp(firebaseConfig);
 
   <div class="container">
     상세페이지
-    <button id="edit">수정</button>
     <div class="detail-pic my-4" style="background-image: url('https://placeimg.com/640/380/tech');"></div>
     <div>
       <h5 class="author">올린사람</h5>
@@ -77,6 +76,8 @@ firebase.initializeApp(firebaseConfig);
       <p class="date">올린날짜</p>
       <p class="price">가격</p>
     </div>
+    <button class="btn btn-outline-secondary" id="edit">수정</button>
+    <button class="btn btn-outline-secondary" id="chat">채팅</button>
 </div>
 
 <script>
@@ -86,7 +87,10 @@ firebase.initializeApp(firebaseConfig);
     var querystring = new URLSearchParams(window.location.search) // 쿼리스트링 문자열 -> 오브젝트로 변환
 
     db.collection('product').doc(querystring.get('id')).get().then((result)=>{
-      console.log(result.data())
+      
+      uploaduid = result.data().uid;
+      title = result.data().음식명;
+
       $('.author').html('올린사람 : ' + result.data().이름)
       $('.title').html(result.data().음식명)
       $('.price').html(result.data().가격 + '원')
@@ -96,6 +100,21 @@ firebase.initializeApp(firebaseConfig);
     $('#edit').click(function(){
       window.location.href = '/edit.html?id=' + querystring.get('id')
     })
+
+    // 채팅
+    var uploaduid;
+    var title;
+    var loginuid = JSON.parse(localStorage.getItem('user')).uid
+
+    $('#chat').click(function(){
+      var 데이터 = {
+        who : [loginuid, uploaduid],
+        product : title,
+        date : new Date()
+      }
+      db.collection('chatroom').add(데이터)
+    })
+
 </script>
 
 </body>

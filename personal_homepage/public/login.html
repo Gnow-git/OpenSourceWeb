@@ -98,10 +98,10 @@ firebase.initializeApp(firebaseConfig);
 
     // 유저 정보 확인
     var userinfo = localStorage.getItem('user')
-    if (userinfo){
-      userinfo = JSON.parse(userinfo);
-      $('#userName').html(userinfo.displayName);
-    }
+     if (userinfo){
+       userinfo = JSON.parse(userinfo);
+       $('#userName').html(userinfo.displayName);
+     }
     
     // 로그인 상태가 변할 때마다 실행
     firebase.auth().onAuthStateChanged((user)=>{
@@ -134,6 +134,13 @@ firebase.initializeApp(firebaseConfig);
         var name = $('#name-new').val();
 
         firebase.auth().createUserWithEmailAndPassword(email, password).then((result)=>{
+            
+          var userinfomation = {
+            ui_name : name,
+            ui_email : email
+          }
+            db.collection('user').doc(result.user.uid).set(userinfomation)
+
             console.log(result)
             console.log(result.user);
             result.user.updateProfile({displayName : name})
