@@ -95,7 +95,7 @@
                     }
                     db.collection('product').add(inputdata).then((result)=>{
                         console.log(result);    // 성공시 담겨오는 정보
-                        window.location.href="/index.html"  // 성공시 index.html로 이동
+                        window.location.href="index.html"  // 성공시 index.html로 이동
                     }).catch((err)=>{
                         console.log(err)    // 실패할 경우 에러 확인
                     })
