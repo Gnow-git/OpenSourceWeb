@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Gamedev Canvas Workshop</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    canvas {
+      background: #eee;
+      display: block;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="myCanvas" width="480" height="320"></canvas>
+
+  <script>
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");    // 2D rendering context
+
+    var x = canvas.width / 2; // 도형 x좌표
+    var y = canvas.height - 30;   // 도형 y좌표
+
+    var dx = 2;   // 움직일 x좌표
+    var dy = -2;  // 움직일 y좌표
+
+    var ballRadius = 10; // 원 반지름
+
+    var paddleHeight = 10;    // 공을 치기 위한 paddle
+    var paddleWidth = 75;
+    var paddleX = (canvas.width - paddleWidth) / 2;
+
+    var rightPressed = false; // 오른쪽 방향 키보드
+    var leftPressed = false;  // 왼쪽 방향 키보드
+
+    var brickRowCount = 3;  // 벽돌 행 설정
+    var brickColumnCount = 5; // 벽돌 열 설정
+    var brickWidth = 75;  // 벽돌 너비
+    var brickHeight = 20; // 벽돌 높이
+    var brickPadding = 10;  // 벽돌 간격
+    var brickOffsetTop = 30; // 캔버스 모서리에 닿지 않게 할 오프셋
+    var brickOffsetLeft = 30;
+
+    var score = 0;  // 점수
+    var add_y = 0; // 벽돌의 y좌표 변경
+
+    var bricks = [];  // 벽돌 초기화
+    for (var c = 0; c < 5; c++) {
+      bricks[c] = [];
+      for (var r = 0; r < 4; r++) {
+        bricks[c][r] = { x: 0, y: 0, status: 1, b_num: brickRowCount - r };
+      }
+    }
+
+    function drawBricks() { // 벽돌 생성하는 함수
+      for (var c = 0; c < brickColumnCount; c++) {
+        for (var r = 0; r < brickRowCount; r++) {
+          if (bricks[c][r].status == 1) {
+            var brickX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
+            var brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop;
+
+            bricks[c][r].x = brickX;
+            bricks[c][r].y = brickY + add_y; // add_y를 추가하여 Y 좌표 변경
+
+            ctx.beginPath();
+            ctx.rect(brickX, brickY + add_y, brickWidth, brickHeight); // Y 좌표에 add_y를 반영하여 벽돌 그리기
+            ctx.fillStyle = "#0095DD";
+            ctx.fill();
+            ctx.closePath();
+
+            var numberX = brickX + brickWidth / 2;
+            var numberY = brickY + brickHeight / 2 + add_y; // Y 좌표에 add_y를 반영하여 숫자 그리기
+            var number = bricks[c][r].b_num;
+
+            ctx.font = "16px Arial";
+            ctx.fillStyle = "#FFFFFF";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText(number, numberX, numberY); // 벽돌에 숫자 표시
+          }
+        }
+      }
+    }
+
+    function moveBricks() {
+      add_y += brickHeight + brickPadding; // add_y 값을 통해 벽돌이 아래로 내려오도록 설정
+    }
+
+    function drawBall() { // 공 지정
+      ctx.beginPath();
+      ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
+      ctx.fillStyle = "#0095DD";
+      ctx.fill();
+      ctx.closePath();
+    }
+
+    function drawPaddle() { // paddle 지정
+      ctx.beginPath();
+      ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
+      ctx.fillStyle = "#0095DD";
+      ctx.fill();
+      ctx.closePath();
+    }
+
+    function drawScore() {  // 점수 지정
+      ctx.font = "16px Arial";
+      ctx.fillStyle = "#0095DD";
+      ctx.fillText("점수: " + score, 50, 20);
+    }
+
+    document.addEventListener("keydown", keyDownHandler, false);  // 키 누름
+    document.addEventListener("keyup", keyUpHandler, false);  //  키에서 손 뗌
+    document.addEventListener("mousemove", mouseMoveHandler, false); // 마우스 이동 감지
+
+    function mouseMoveHandler(e) {  // 마우스에 따른 paddle 이동
+      var relativeX = e.clientX - canvas.offsetLeft;
+      if (relativeX > 0 && relativeX < canvas.width) {
+        paddleX = relativeX - paddleWidth / 2;
+      }
+    }
+
+    function keyDownHandler(e) {  // 키보드 누를 경우
+      if (e.key == "right" || e.key == "ArrowRight") {   // 오른쪽
+        rightPressed = true;
+      }
+      else if (e.key == "Left" || e.key == "ArrowLeft") {   // 왼쪽
+        leftPressed = true;
+      }
+    }
+
+    function keyUpHandler(e) {    // 키보드 뗄 경우
+      if (e.key == "right" || e.key == "ArrowRight") {   // 오른쪽
+        rightPressed = false;
+      }
+      else if (e.key == "Left" || e.key == "ArrowLeft") {   // 왼쪽
+        leftPressed = false;
+      }
+    }
+
+    function collisionDetection() { // 벽돌 충돌 감지 함수
+      for (var c = 0; c < brickColumnCount; c++) {
+        for (var r = 0; r < brickRowCount; r++) {
+          var b = bricks[c][r];
+
+          if (b.status == 1) {
+            // 공의 x > 벽돌 x, 공의 X < 벽돌 x좌표 + 가로 길이, 공 y 좌표 > 벽돌 y, 공 y 좌표 < 벽돌 y + 높이
+            if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
+              dy = -dy;
+              b.b_num--;
+              if (b.b_num == 0) {
+                b.status = 0; // 부딪혔을 경우 0으로
+                score++;  // 점수 증가
+                if (score == brickRowCount * brickColumnCount) {  // 다부셧을 경우
+                  alert("모든 벽돌을 부셨습니다! 축하합니다!");
+                  document.location.reload();
+                }
+              }
+
+            }
+          }
+
+        }
+      }
+    }
+
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);   // 이전 프레임 흔적 지우기
+
+      drawBricks(); // 벽돌 객체 불러오기
+      drawBall(); // 공 객체 불러오기
+      drawPaddle(); // paddle 객체 불러오기
+      drawScore();  // 점수 객체 불러오기
+      collisionDetection(); // 충돌 감지 불러오기
+
+      if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) { // 좌우 벽에 닿이면 반대 방향으로 이동
+        dx = - dx;
+      }
+
+      if (y + dy < ballRadius) { // 위의 벽에 닿이면 반대 방향으로 이동
+        dy = - dy;
+      } else if (y + dy > canvas.height - ballRadius) { // 공이 밑면에 충돌할 경우 -> 벽돌 추가하도록
+        if (x > paddleX && x < paddleX + paddleWidth) { // 공이 밑에 발판에 닿이면 
+          dy = -dy; // 공이 반대로 이동
+
+        }
+        else {  // 바닥에 공이 닿일 경우
+
+          moveBricks(); // 벽돌 한줄 내려옴 
+
+          // 벽돌이 바닥에 닿았을 때 게임 종료
+          for (var c = 0; c < brickColumnCount; c++) {
+            for (var r = 0; r < brickRowCount; r++) {
+              if (bricks[c][r].status == 1 && bricks[c][r].y + dy > canvas.height - brickHeight - brickPadding) {
+                alert("게임 종료");
+                document.location.reload();
+              }
+              else {  // 벽돌이 땅에 안 닿았다면
+                x = canvas.width / 2;
+                y = canvas.height - 30;
+                dx = 2;
+                dy = -2;
+                paddleX = (canvas.width - paddleWidth) / 2;
+              }
+            }
+          }
+        }
+      }
+
+      if (rightPressed && paddleX < canvas.width - paddleWidth)    // 왼쪽 누를 경우
+      {
+        paddleX += 7;
+      } else if (leftPressed && paddleX > 0) {   // 오른쪽 누를 경우
+        paddleX -= 7;
+      }
+
+      x += dx;    // dx만큼 이동
+      y += dy;    // dy만큼 이동
+      requestAnimationFrame(draw);
+    }
+
+    draw(); // 랜더링 개선
+
+  </script>
+
+</body>
+
+</html>
