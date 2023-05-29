@@ -5,31 +5,44 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" type="text/css" href="main.css">
+  <link rel="stylesheet" type="text/css" href="\style\header.css">
 </head>
 
 <body>
-  <header>
-    <div class="container">
-      <nav>
-  
-        <ul class="place">
-          <li><a href="#">소개</a></li>
-          <li><a href="#">이용안내</a></li>
-          <li><a href="#">공지사항</a></li>
-          <li>
-            <a href="#">맛집조회</a>
-            <ul class="sub_place">
-              <li><a href="#">상당구</a></li>
-              <li><a href="#">청원구</a></li>
-              <li><a href="#">흥덕구</a></li>
-              <li><a href="#">서원구</a></li>
-            </ul>
-          </li>
-          <li><a href="#">마이페이지</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <div id="wrap">
+    <header>
+      <!-----로고 + 검색창 + 로그인 + 회원가입----->
+      <img class="header_img" src="./image/logo/logo_header.png">
+      <label class="search">
+        <input type="text" placeholder="검색어 입력">
+        <!--돋보기 이미지이니, src 건들지 말 것--뒤에 post나 get작성할 것-->
+        <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+      </label>
+      <span class="links">
+      <a href="#" right="40px" top="30px">로그인</a>
+      <a href="#">회원가입</a>
+    </span>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </header>
+    <br>
+    <!-----내비게이션 바------>
+    <nav>
+      <ul class="place">
+        <li><a href="#">소개</a></li>
+        <li><a href="#">이용안내</a></li>
+        <li><a href="#">공지사항</a></li>
+        <li>
+          <a href="#">맛집조회</a>
+          <ul class="sub_place">
+            <li><a href="#">상당구</a></li>
+            <li><a href="#">청원구</a></li>
+            <li><a href="#">흥덕구</a></li>
+            <li><a href="#">서원구</a></li>
+          </ul>
+        </li>
+        <li><a href="#">마이페이지</a></li>
+      </ul>
+    </nav>
+  </div>
 </body>
 </html>
