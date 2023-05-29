@@ -42,7 +42,6 @@
   var score = 0;  // 점수
   var lives = 3;  // 목숨
 
-
   var bricks = [];  // 벽돌 초기화
   for(var c = 0; c < brickColumnCount; c++) {
     bricks[c] = [];
@@ -64,6 +63,17 @@
           ctx.fillStyle = "#0095DD";
           ctx.fill();
           ctx.closePath();
+
+        // 벽돌에 숫자 그리기
+        var numberX = brickX + brickWidth / 2; // 숫자의 가운데 x 좌표 계산
+        var numberY = brickY + brickHeight / 2; // 숫자의 가운데 y 좌표 계산
+        var number = brickRowCount - r; // 벽돌의 숫자 표시하기(RowCount의 역순 계산)
+
+        ctx.font = "16px Arial";
+        ctx.fillStyle = "#FFFFFF";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(number, numberX, numberY);
         }
       }
     }
