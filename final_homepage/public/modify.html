@@ -42,11 +42,13 @@
 <!--jQuery-->
 <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 
-  <!--업로드-->
+  <!--리뷰 작성 항목-->
   <div class="container mt-3">
-    <input type="text" class="form-control mt-2" id="title" placeholder="title">
-    <textarea class="form-control mt-2" id="content">content</textarea>
-    <input type="text" class="form-control mt-2" id="price" placeholder="price">
+    <input type="text" class="form-control mt-2" id="store_name" placeholder="가게이름">
+    <input type="text" class="form-control mt-2" id="location" placeholder="가게 위치">
+    <input type="text" class="form-control mt-2" id="food" placeholder="먹은 메뉴">
+    <textarea class="form-control mt-2" id="review" placeholder="리뷰"></textarea>
+    <input type="text" class="form-control mt-2" id="price" placeholder="가격">
     <input class="form-control mt-2" type="file" id="image">
     <button class="btn btn-danger mt-3" id="send">올리기</button>
   </div>
@@ -68,16 +70,20 @@
 
     db.collection('product').doc(querystring.get('id')).get().then((result)=>{
         console.log(result.data())
-        $('#title').val(result.data().음식명)
-        $('#content').val(result.data().내용)
+        $('#store_name').val(result.data().가게이름)
+        $('#location').val(result.data().가게위치)
+        $('#food').val(result.data().메뉴)
+        $('#review').val(result.data().리뷰)
         $('#price').val(result.data().가격)
     })
 
     $('#send').click(function(){
         var modify = {
-            음식명 : $('#title').val(),
-            가격 : $('#price').val(),
-            내용 : $('#content').val()
+            가게이름 : $('#store_name').val(),
+            가게위치 : $('#location').val(),
+            메뉴 : $('#food').val(),
+            리뷰 : $('#review').val(),
+            가격 : $('#price').val()
         }
     
         db.collection('product').doc(querystring.get('id')).update(modify)

@@ -6,7 +6,7 @@
   }
   .thumbnail {
     max-width: 200px;
-    width: 100%;
+    width: 50%;
     border-radius: 10px;
     background-size: cover;
     background-position: center;
@@ -50,4 +50,19 @@
   }
   .mine {
     float: right;
+  }
+  /*리뷰*/
+  .container_review{
+    box-sizing: border-box;
+    position: absolute;
+    width: 720px;
+    height: 505px;
+    left: 500px;
+    top: 250px;
+
+    border: 3px solid #E5EEE4;
+  }
+
+  .container_review > text{
+    width: 50px;
   }
