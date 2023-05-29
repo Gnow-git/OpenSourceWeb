@@ -1,0 +1,151 @@
+/*-------------------전체에 적용할 것----------------------*/
+#wrap{
+width:100%;
+}
+
+
+
+
+/*--------------------헤더----------------------*/
+/*----로고 + 검색창 + 로그인 + 회원가입-----*/
+
+header {
+position: absolute;
+left: 0;
+width: 100%;
+height: 100px;
+z-index: 100;
+display: inline;
+}
+
+header > .header_img{
+width:140px;
+height:80px;
+margin-left: 30px;
+margin-right: 30px;
+display: inline-block;
+}
+
+
+header > .search{
+position: absolute;
+width: 1200px;
+padding-top: 25px;
+display: inline;
+}
+/*------------검색창------------*/
+header > .search > input {
+width: 100%;
+border: 1px solid #bbb;
+border-radius: 8px;
+padding: 10px 12px;
+font-size: 15px;  /*검색창 높이 이걸로 조절함*/
+display: inline;
+}
+
+/*------------돋보기------------*/
+header > .search > img {
+position : absolute;
+width: 17px;
+top: 10px;
+right: 12px;
+margin: 0;
+padding-top: 25px;
+}
+
+header > p > a{
+top: 10;
+right: -25px;
+display: inline;
+}
+
+header > .links {
+  position: absolute;
+  top: 30px;
+  right: 30px; /* 오른쪽 여백 조정 */
+}
+
+header > .links > a {
+  margin-left: 10px;
+}
+
+
+/*--------------------내비게이션 바----------------------*/
+nav {
+position: absolute;
+padding-top: 60px;
+/*margin-left: 40%;*/
+width: 100%;
+height: 60px;
+}
+
+
+
+nav > .place {
+  list-style: none;
+  display: flex;
+  background-color: rgba(83, 182, 71, 0.22);
+  position: fixed;  /*sub_place 사라지는거 방지*/
+  left: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.place > li {
+float: left;
+width: 18%;
+position: relative;
+}
+
+.place > li > a {
+display: block;
+height: 60px;
+line-height: 60px;
+font-size: 20px;
+font-weight: 700;
+transition: all 0.4s;
+color: #000000;
+text-align: center;
+}
+
+.sub_place {
+position: absolute;
+top: 100%;
+left: 0;
+width: 100%;
+list-style: none;
+display: none;
+background-color: rgba(83, 182, 71, 0.22);
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+padding: 10px;
+}
+
+
+
+.sub_place > li {
+margin-bottom: 10px;
+}
+
+
+.sub_place > li > a {
+display: block;
+height: 40px;
+line-height: 20px;
+font-size: 20px;
+color: #0c3055;
+font-weight: 700;
+text-align: center;
+transition: all 0.4s;
+}
+
+
+
+/*-----내비게이션 추가 내용-----*/
+.place > li:hover .sub_place {
+display: block;
+}
+/*--------------------내비게이션 바 font 속성----------------------*/
+a:link{color:black; text-decoration:none;}
+a:visited{color:black; text-decoration:none;}
+a:hover{color:black; text-decoration:none;}
+a:active{color:black; text-decoration:none;}
