@@ -46,7 +46,7 @@
   for(var c = 0; c < brickColumnCount; c++) {
     bricks[c] = [];
     for (var r = 0; r < brickRowCount; r++) {
-      bricks[c][r] = {x: 0, y: 0, status: 1 };
+      bricks[c][r] = {x: 0, y: 0, status: 1, b_num: brickRowCount -r };
     }
   }
 
@@ -67,7 +67,7 @@
         // 벽돌에 숫자 그리기
         var numberX = brickX + brickWidth / 2; // 숫자의 가운데 x 좌표 계산
         var numberY = brickY + brickHeight / 2; // 숫자의 가운데 y 좌표 계산
-        var number = brickRowCount - r; // 벽돌의 숫자 표시하기(RowCount의 역순 계산)
+        var number = bricks[c][r].b_num; // 벽돌의 숫자 표시하기
 
         ctx.font = "16px Arial";
         ctx.fillStyle = "#FFFFFF";
@@ -145,12 +145,16 @@
           // 공의 x > 벽돌 x, 공의 X < 벽돌 x좌표 + 가로 길이, 공 y 좌표 > 벽돌 y, 공 y 좌표 < 벽돌 y + 높이
           if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
             dy = -dy;
-            b.status = 0; // 부딪혔을 경우 0으로
-            score++;  // 점수 증가
-            if(score == brickRowCount * brickColumnCount){  // 다부셧을 경우
-              alert("YOU WIN, CONGRATULATIONS!");
-              document.location.reload();
+            b.b_num --;
+            if(b.b_num == 0){
+              b.status = 0; // 부딪혔을 경우 0으로
+              score++;  // 점수 증가
+              if(score == brickRowCount * brickColumnCount){  // 다부셧을 경우
+                alert("YOU WIN, CONGRATULATIONS!");
+                document.location.reload();
+              }
             }
+
           }
         }
         
@@ -172,14 +176,17 @@
         dx = - dx;
     }
     
-    if ( y + dy < ballRadius) { // 상하 벽에 닿이면 반대 방향으로 이동
+    if ( y + dy < ballRadius) { // 위의 벽에 닿이면 반대 방향으로 이동
         dy = - dy;
-    } else if(y + dy > canvas.height - ballRadius) { // 공이 밑면에 충돌할 경우 게임 종료
-        if (x > paddleX && x < paddleX + paddleWidth) {
+    } else if(y + dy > canvas.height - ballRadius) { // 공이 밑면에 충돌할 경우 벽돌 추가
+        if (x > paddleX && x < paddleX + paddleWidth) { // 공이 밑에 발판에 닿이면 공이 반대로 이동
             dy = -dy;
         }
-        else {
-          lives--;  // 목숨 깎임
+        else {  // 바닥에 공이 닿일 경우
+          //lives--;  // 목숨 깎임 -> 목숨 깎이는 것에서 바닥에 닿이면 끝나는걸로 설정
+          
+          // 벽돌 내려오는 코드를 작성해야함
+
           if(!lives){ // 목숨이 없으면
             alert("GAME OVER");
             document.location.reload();
