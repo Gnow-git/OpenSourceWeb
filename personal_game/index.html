@@ -41,6 +41,7 @@
 
   var score = 0;  // 점수
   var lives = 3;  // 목숨
+  var add_y = 0; // 벽돌 내려오도록 설정
 
   var bricks = [];  // 벽돌 초기화
   for(var c = 0; c < brickColumnCount; c++) {
@@ -50,30 +51,43 @@
     }
   }
 
-  function drawBricks() { // 벽돌 생성
-    for (var c = 0; c<brickColumnCount; c++) {
-      for(var r = 0; r<brickRowCount; r++) {
-        if(bricks[c][r].status == 1){ // 안 부딪혔을 경우 표시함
-          var brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft; // 벽돌의 x 값 계산
-          var brickY = (r*(brickHeight+brickPadding))+brickOffsetTop; // 벽돌의 x 값 계산
+  function drawBricks() {
+    for (var c = 0; c < brickColumnCount; c++) {
+      for (var r = 0; r < brickRowCount; r++) {
+        if (bricks[c][r].status == 1) {
+          var brickX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
+          var brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop;
+  
           bricks[c][r].x = brickX;
-          bricks[c][r].y = brickY;
+          bricks[c][r].y = brickY + add_y; // add_y를 추가하여 Y 좌표 변경
+  
           ctx.beginPath();
-          ctx.rect(brickX, brickY, brickWidth, brickHeight);
+          ctx.rect(brickX, brickY + add_y, brickWidth, brickHeight); // Y 좌표에 add_y를 반영하여 벽돌 그리기
           ctx.fillStyle = "#0095DD";
           ctx.fill();
           ctx.closePath();
+  
+          var numberX = brickX + brickWidth / 2;
+          var numberY = brickY + brickHeight / 2 + add_y; // Y 좌표에 add_y를 반영하여 숫자 그리기
+          var number = bricks[c][r].b_num;
+  
+          ctx.font = "16px Arial";
+          ctx.fillStyle = "#FFFFFF";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText(number, numberX, numberY);
+        }
+      }
+    }
+  }
 
-        // 벽돌에 숫자 그리기
-        var numberX = brickX + brickWidth / 2; // 숫자의 가운데 x 좌표 계산
-        var numberY = brickY + brickHeight / 2; // 숫자의 가운데 y 좌표 계산
-        var number = bricks[c][r].b_num; // 벽돌의 숫자 표시하기
-
-        ctx.font = "16px Arial";
-        ctx.fillStyle = "#FFFFFF";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText(number, numberX, numberY);
+  function moveBricks() {
+    add_y += brickHeight + brickPadding; // moveBricks() 함수가 호출될 때마다 add_y 값 추가
+  
+    for (var c = 0; c < brickColumnCount; c++) {
+      for (var r = brickRowCount - 1; r >= 0; r--) {
+        if (bricks[c][r].status == 1) {
+          bricks[c][r].y += brickHeight + brickPadding;
         }
       }
     }
@@ -98,13 +112,13 @@
   function drawScore() {  // 점수 지정
     ctx.font = "16px Arial";
     ctx.fillStyle = "#0095DD";
-    ctx.fillText("Score: " +score, 8, 20);
+    ctx.fillText("점수: " +score, 50, 20);
   }
 
   function drawLives() {  // 목숨 지정
     ctx.font = "16px Arial";
     ctx.fillStyle = "#0095DD";
-    ctx.fillText("Lives: " +lives, canvas.width-65, 20);
+    ctx.fillText("남은 기회: " +lives, canvas.width-65, 20);
   }
 
   document.addEventListener("keydown", keyDownHandler, false);  // 키 누름
@@ -118,7 +132,7 @@
     }
   }
 
-  function keyDownHandler(e) {  // 키 누를 경우
+  function keyDownHandler(e) {  // 키보드 누를 경우
     if(e.key == "right" || e.key == "ArrowRight") {   // 오른쪽
         rightPressed = true;
     }
@@ -127,7 +141,7 @@
     }
   }
 
-  function keyUpHandler(e) {    // 키 뗄 경우
+  function keyUpHandler(e) {    // 키보드 뗄 경우
     if(e.key == "right" || e.key == "ArrowRight") {   // 오른쪽
         rightPressed = false;
     }
@@ -162,6 +176,7 @@
     }
   }
   
+  
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);   // 이전 프레임 흔적 지우기
     
@@ -178,16 +193,18 @@
     
     if ( y + dy < ballRadius) { // 위의 벽에 닿이면 반대 방향으로 이동
         dy = - dy;
-    } else if(y + dy > canvas.height - ballRadius) { // 공이 밑면에 충돌할 경우 벽돌 추가
-        if (x > paddleX && x < paddleX + paddleWidth) { // 공이 밑에 발판에 닿이면 공이 반대로 이동
-            dy = -dy;
+    } else if(y + dy > canvas.height - ballRadius) { // 공이 밑면에 충돌할 경우 -> 벽돌 추가하도록
+        if (x > paddleX && x < paddleX + paddleWidth) { // 공이 밑에 발판에 닿이면 
+            dy = -dy; // 공이 반대로 이동
+           
         }
         else {  // 바닥에 공이 닿일 경우
-          //lives--;  // 목숨 깎임 -> 목숨 깎이는 것에서 바닥에 닿이면 끝나는걸로 설정
-          
-          // 벽돌 내려오는 코드를 작성해야함
 
-          if(!lives){ // 목숨이 없으면
+          moveBricks(); // 벽돌 한줄 내려옴 
+          
+          lives--;  // 목숨 깎임 -> 목숨 깎이는 것에서 바닥에 닿이면 끝나는걸로 설정
+        
+          if(!lives){ // 목숨이 없으면 -> 벽돌이 땋에 닿이면으로 바꿔야함
             alert("GAME OVER");
             document.location.reload();
           }
