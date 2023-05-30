@@ -140,19 +140,25 @@
       var password = $('#pw-new').val();
       var name = $('#name-new').val();
 
-      firebase.auth().createUserWithEmailAndPassword(email, password).then((result) => {
+      firebase.auth().createUserWithEmailAndPassword(email, password).then(
+       /**가입이 완료 되면*/ 
+      (result) => {
 
         var userinfomation = {
           ui_name: name,
           ui_email: email
         }
-        db.collection('user').doc(result.user.uid).set(userinfomation)
-
-        console.log(result)
-        console.log(result.user);
-        result.user.updateProfile({ displayName: name })
-        alert("회원가입 되었습니다. ");
-        location.href = "login.html";
+        
+        /** 유저 정보 user라는 컬렉션으로 db에 저장 */
+        db.collection('user').doc(result.user.uid).set(userinfomation).then(() => {
+          console.log(result)
+            console.log(result.user);
+            result.user.updateProfile({ displayName: name })
+            alert("회원가입 되었습니다. ");
+            location.href = "login.html";
+        }).catch((err) => {
+          console.log(err)    // 실패할 경우 에러 확인
+        })
       }).catch()
     })
   </script>
