@@ -1,137 +1,162 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <script src="key.js"></script>
+  <script src="https://www.w3schools.com/lib/w3.js"></script>
+  <!--헤더 추가할 때 사용-->
   <!--bootstrap-->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="\main.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="style/main.css">
 </head>
 
 <body>
-<!--firebase용 코드 시작-->
-<script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
 
-<script>
-var firebaseConfig = {
-    apiKey: firebase_Key,
-    authDomain: firebase_authDomain,
-    projectId: firebase_projectId,
-    storageBucket: firebase_storageBucket,
-    messagingSenderId: firebase_messagingSenderId,
-    appId: firebase_appId,
-    measurementId: firebase_measurementId
-};
+  <!--header 불러오기-->
+  <div w3-include-html="header.html"></div>
+  <script>
+    /**header.html 화면에 나타나게 함*/
+    w3.includeHTML();
+  </script>
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+  <!--firebase용 코드 시작-->
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
 
-</script>
-<!--firebase용 코드 끝-->
+  <script>
+    var firebaseConfig = {
+      apiKey: firebase_Key,
+      authDomain: firebase_authDomain,
+      projectId: firebase_projectId,
+      storageBucket: firebase_storageBucket,
+      messagingSenderId: firebase_messagingSenderId,
+      appId: firebase_appId,
+      measurementId: firebase_measurementId
+    };
 
-<!--bootstrap-->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
 
-<!--jQuery-->
-<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+  </script>
+  <!--firebase용 코드 끝-->
 
-  <div class="container mt-3">
-    <div class="mb-3">
+  <!--bootstrap-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+    crossorigin="anonymous"></script>
+
+  <!--jQuery-->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+    integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+
+  <div class="sign_up">
+    <div class="sign_up_name">
       <input type="text" class="form-control" placeholder="name" id="name-new">
     </div>
-    <div class="mb-3">
+    <div class="sign_up_email">
       <input type="email" class="form-control" placeholder="email" id="email-new">
     </div>
-    <div class="mb-3">
+    <div class="sign_up_pw">
       <input type="password" class="form-control" placeholder="pw" id="pw-new">
     </div>
-    <button type="submit" class="btn btn-primary" id="register">가입하기</button>
- </div>
+    <button type="submit" class="sign_up_btn" id="register">가입하기</button>
+  </div>
 
- <div class="container mt-3">
-    <div class="mb-3">
+  <div class="login">
+    <div class="login_email">
       <input type="email" class="form-control" placeholder="email" id="email">
     </div>
-    <div class="mb-3">
+    <div class="login_pw">
       <input type="password" class="form-control" placeholder="pw" id="pw">
     </div>
     <button type="submit" class="btn btn-primary" id="login">로그인하기</button>
     <button type="submit" class="btn btn-primary" id="logout">로그아웃</button>
 
- </div>
-
-<script>
+  </div>
+  <script>
+    /**파이어베이스 db 접근할 때 사용*/
     const db = firebase.firestore();
     const storage = firebase.storage();
 
-    // 유저 정보 확인
+    /** localStorage에서 유저 정보 얻어옴 */
     var userinfo = localStorage.getItem('user')
-     if (userinfo){
-       userinfo = JSON.parse(userinfo);
-       $('#userName').html(userinfo.displayName);
-     }
-    
-    // 로그인 상태가 변할 때마다 실행
-    firebase.auth().onAuthStateChanged((user)=>{
-      if(user){ // 로그인을 했다면
+    if (userinfo) {
+      /**user JSON의 따옴표 제거*/
+      userinfo = JSON.parse(userinfo);
+
+      /**로그인한 유저 이름을 헤더의 로그인 위치에 출력*/
+      $('#user_login').html(userinfo.displayName);
+    }
+
+    /** 로그인 상태가 변할 때마다 실행, 새로고침시에도 log 출력 */
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) { // 로그인을 했다면
         console.log(user.uid)
         console.log(user.displayName)
-        
+
+        // $('#user_login').html(user.displayName); // 이걸로도 이름 바뀌지만 반응이 느림
+
+        /**
+        localstorage를 통해 user정보 미리 저장해서 빠르게 출력
+        object인 user는 깨지므로 JSON.stringify로 바꿔줌
+        */
         localStorage.setItem('user', JSON.stringify(user))
-        //localStorage.setItem('user',JSON.stringify(user))  // 유저 정보 localstorage에 저장
       }
     })
 
-    $('#logout').click(function(){
-        firebase.auth().signOut()
-        localStorage.removeItem('user')
-        alert("로그아웃 되었습니다. ");
-        location.href = "login.html";
+    $('#logout').click(function () {  //로그 아웃 처리
+      firebase.auth().signOut()
+      localStorage.removeItem('user')
+      alert("로그아웃 되었습니다. ");
+      location.href = "login.html";
     })
 
-    $('#login').click(function(){
+    $('#login').click(function () {
 
-        var email = $('#email').val();
-        var password = $('#pw').val();
+      var email = $('#email').val();
+      var password = $('#pw').val();
 
-        firebase.auth().signInWithEmailAndPassword(email, password).then((result)=>{
+      firebase.auth().signInWithEmailAndPassword(email, password).then((result) => {
         console.log(result.user)
         alert("로그인 되었습니다. ");
         location.href = "index.html";
-        }).catch((err)=>{
-          console.log(err)    // 실패할 경우 에러 확인
-          alert("로그인에 실패하였습니다.");
+      }).catch((err) => {
+        console.log(err)    // 실패할 경우 에러 확인
+        alert("로그인에 실패하였습니다.");
       })
-        
+
     })
-    $('#register').click(function(){    // 가입하기 버튼 누를 경우
+    $('#register').click(function () {    // 가입하기 버튼 누를 경우
 
-        var email = $('#email-new').val();
-        var password = $('#pw-new').val();
-        var name = $('#name-new').val();
+      /** 사용자가 input에 입력한 값 불러오기 */
+      var email = $('#email-new').val();
+      var password = $('#pw-new').val();
+      var name = $('#name-new').val();
 
-        firebase.auth().createUserWithEmailAndPassword(email, password).then((result)=>{
-            
-          var userinfomation = {
-            ui_name : name,
-            ui_email : email
-          }
-            db.collection('user').doc(result.user.uid).set(userinfomation)
+      firebase.auth().createUserWithEmailAndPassword(email, password).then((result) => {
 
-            console.log(result)
-            console.log(result.user);
-            result.user.updateProfile({displayName : name})
-            alert("회원가입 되었습니다. ");
-            location.href = "login.html";
-        }).catch()
+        var userinfomation = {
+          ui_name: name,
+          ui_email: email
+        }
+        db.collection('user').doc(result.user.uid).set(userinfomation)
+
+        console.log(result)
+        console.log(result.user);
+        result.user.updateProfile({ displayName: name })
+        alert("회원가입 되었습니다. ");
+        location.href = "login.html";
+      }).catch()
     })
-</script>
+  </script>
 
 </body>
+
 </html>
