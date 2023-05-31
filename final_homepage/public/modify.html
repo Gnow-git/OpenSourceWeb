@@ -58,12 +58,17 @@
     const db = firebase.firestore();
     const storage = firebase.storage();
 
-        // 유저 정보 확인
-        var userinfo = localStorage.getItem('user')
-        if (userinfo){
-          userinfo = JSON.parse(userinfo);
-          $('#userName').html(userinfo.displayName);
+      /** localStorage에서 유저 정보 얻어옴 */
+      var userinfo = localStorage.getItem('user')
+      if (userinfo) {
+        /**user JSON의 따옴표 제거*/
+        userinfo = JSON.parse(userinfo);
+
+        /**로그인한 유저 이름을 헤더의 로그인 위치에 출력*/
+        if(userinfo.displayName != null){
+          $('#user_login').html(userinfo.displayName);
         }
+      }
 
     var querystring = new URLSearchParams(window.location.search);
     querystring.get('id');

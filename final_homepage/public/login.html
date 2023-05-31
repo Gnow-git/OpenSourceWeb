@@ -92,7 +92,9 @@
       userinfo = JSON.parse(userinfo);
 
       /**로그인한 유저 이름을 헤더의 로그인 위치에 출력*/
-      $('#user_login').html(userinfo.displayName);
+      if(userinfo.displayName != null){
+        $('#user_login').html(userinfo.displayName);
+      }
     }
 
     /** 로그인 상태가 변할 때마다 실행, 새로고침시에도 log 출력 */

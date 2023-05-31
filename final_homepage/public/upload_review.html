@@ -54,26 +54,33 @@
   </script>
   <!--업로드-->
   <div class="container_review">
+    <a class="review_title">맛집 리뷰 작성</a>
     <input type="text" class="form-control mt-2" id="store_name" placeholder="가게이름">
     <input type="text" class="form-control mt-2" id="location" placeholder="가게 위치">
     <input type="text" class="form-control mt-2" id="food" placeholder="먹은 메뉴">
     <textarea class="form-control mt-2" id="review" placeholder="리뷰"></textarea>
     <input type="text" class="form-control mt-2" id="price" placeholder="가격">
     <input class="form-control mt-2" type="file" id="image">
-    <button class="btn btn-danger mt-3" id="send">올리기</button>
   </div>
+
+  <button class="btn btn-danger mt-3 upload_btn" id="send">올리기</button>
 
   <!--업로드 기능 구현-->
   <script>
     const db = firebase.firestore();
     const storage = firebase.storage();
 
-    // 유저 정보 확인
-    var userinfo = localStorage.getItem('user')
-    if (userinfo) {
-      userinfo = JSON.parse(userinfo);
-      $('#userName').html(userinfo.displayName);
-    }
+      /** localStorage에서 유저 정보 얻어옴 */
+      var userinfo = localStorage.getItem('user')
+      if (userinfo) {
+        /**user JSON의 따옴표 제거*/
+        userinfo = JSON.parse(userinfo);
+
+        /**로그인한 유저 이름을 헤더의 로그인 위치에 출력*/
+        if(userinfo.displayName != null){
+          $('#user_login').html(userinfo.displayName);
+        }
+      }
 
     $('#send').click(function () {  // 올리기 버튼 누를 경우
 
