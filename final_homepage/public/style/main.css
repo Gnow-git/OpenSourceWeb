@@ -193,3 +193,39 @@ color: #3F443F;
   left: 50px;
   width: 500px;
 }
+
+/**post.html css*/
+
+.post_form{
+  position: absolute;
+  top : 300px;
+  left: 500px;
+  width: 984px;
+  display: flex;
+  justify-content: center;
+}
+
+.post_head {
+  background-color: #D9D9D9;
+  text-align: center;
+}
+
+.post_body {
+  text-align: center;
+}
+.pagination {
+  position: absolute;
+  top: 400px;
+}
+
+.pagination a {
+  display: block;
+  font-size: 14px;
+  margin : 10px;
+  text-decoration: none;
+  padding: 5px 12px;
+  color: #fff;
+  margin-left: -1px;
+  border: 1px solid transparent;
+  line-height: 1.5;
+}
