@@ -237,50 +237,51 @@ color: #3F443F;
 
 /** 음식 추천 화면 css food_pick*/
 
-#food_pick{
+#food_pick {
   position: absolute;
   width: 720px;
   height: 372px;
-  left: 356px;
-  top: 338px;
-  
+  left: 50%;
+  top: 55%;
+  transform: translate(-50%, -50%);
   background: #FFFFFF;
   border: 3px solid #E5EEE4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: -2;
+}
+
+.food_pick_title {
+  position: absolute;
+  width: auto;
+  height: 48px;
+  left: 30%;
+  top: 31%;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 48px;
+  text-align: center;
+  color: #3F443F;
+  background-color: #FFFFFF;
   z-index: -1;
 }
 
-.food_pick_title{
+#food {
   position: absolute;
-width: auto;
-height: 48px;
-left: 395px;
-top: 315px;
-
-font-family: 'Inter';
-font-style: normal;
-font-weight: 700;
-font-size: 40px;
-line-height: 48px;
-text-align: center;
-
-color: #3F443F;
-
-background-color: #FFFFFF;
-}
-
-#food{
-  position: absolute;
-width: 194px;
-height: 63px;
-left: 623px;
-top: 493px;
-
-font-family: 'Inter';
-font-style: normal;
-font-weight: 700;
-font-size: 50px;
-line-height: 61px;
-text-align: center;
-
-color: rgba(0, 0, 0, 0.34);
+  width: auto;
+  height: 63px;
+  left: 50%;
+  top: 55%;
+  transform: translate(-50%, -50%);
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 61px;
+  text-align: center;
+  margin: 0;
+  color: rgba(0, 0, 0, 0.34);
 }
