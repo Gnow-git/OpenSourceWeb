@@ -57,6 +57,21 @@
 
 /** 항목 css 끝 */
 
+/**음식 추천 버튼 css*/
+.pick_btn{
+  top: 70%;
+  left: 80%;
+  position: fixed;
+  border: 3px solid #519d9e;
+  color: black;
+  background-color: #FFFFFF;
+  z-index: 1;
+}
+
+.pick_btn:hover {
+  background-color: #77af9c;
+  color: #d7fff1;
+}
 
 /**리뷰 작성하기 버튼 css*/
 
