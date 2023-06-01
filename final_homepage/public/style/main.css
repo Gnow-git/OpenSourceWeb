@@ -1,4 +1,7 @@
 /** index */
+#wrapper{
+  height : 100%;
+}
 
 .food_list {
   box-sizing: border-box;
