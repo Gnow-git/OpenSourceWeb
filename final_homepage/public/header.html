@@ -14,11 +14,15 @@
   <div id="wrap">
     <header>
       <!-----로고 + 검색창 + 로그인 + 회원가입----->
+      <a href="index.html">
       <img class="header_img" src="./image/logo/logo_header.png">
+      </a>
       <label class="search">
         <input type="text" placeholder="검색어 입력">
         <!--돋보기 이미지이니, src 건들지 말 것--뒤에 post나 get작성할 것-->
-        <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+        <a href="#">
+          <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+        </a>
       </label>
       <span class="links">
       <!-- 이부분 수정 id 지정 팀원에게 알려줄것 -->
@@ -34,17 +38,16 @@
       <ul class="place">
         <li><a href="intro.html">소개</a></li>
         <li><a href="#">이용안내</a></li>
-        <li><a href="#">공지사항</a></li>
-        <li>
-          <a href="#">맛집조회</a>
-          <ul class="sub_place">
+        <li><a href="notice.html">공지사항</a></li>
+        <li class="sub_place"><a href="#">맛집조회</a>
+          <ul>
             <li><a href="#">상당구</a></li>
             <li><a href="#">청원구</a></li>
             <li><a href="#">흥덕구</a></li>
             <li><a href="#">서원구</a></li>
           </ul>
         </li>
-        <li><a id="myPage" href="#">마이페이지</a></li>
+        <li><a id="myPage" href="mypage.html">마이페이지</a></li>
       </ul>
     </nav>
   </div>

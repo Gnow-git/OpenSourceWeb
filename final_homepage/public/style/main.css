@@ -25,6 +25,7 @@
   width: 400px;
   position: relative;
   padding: 10px;
+  z-index: -1;  /** 헤더에 가려져서 보이도록 음수로 지정 */
 }
 
 .thumbnail {
@@ -197,7 +198,7 @@ color: #3F443F;
   width: 500px;
 }
 
-/**post.html css*/
+/** 공지사항 notice.html css*/
 
 .post_form{
   position: absolute;
@@ -206,6 +207,7 @@ color: #3F443F;
   width: 984px;
   display: flex;
   justify-content: center;
+  margin: 0 auto;
 }
 
 .post_head {

@@ -11,17 +11,29 @@
     <link rel="stylesheet" type="text/css" href="./style/header.css">
     <link rel="stylesheet" type="text/css" href="./style/myPage.css">
     <link rel="stylesheet" type="text/css" href="./style/footer.css">
+
+    <!--jQuery-->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+
+    <!-- 다른 html을 포함할때 사용-->
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#headers").load("header.html");  // 원하는 파일 경로를 삽입하면 된다
+            $("#footers").load("footer.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
+
+        });
+    </script>
 </head>
 
 <body>
-    <div id="wrap">
-        <!--header 불러오기-->
-        <div w3-include-html="header.html"></div>
-        <script>
-            /**header.html 화면에 나타나게 함*/
-            w3.includeHTML();
-        </script>
 
+    <div id="wrap">
+
+    <!--header 불러오기-->
+    <div id="headers"></div>
+    
         <!-- firebase용 코드 시작 -->
         <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
@@ -52,7 +64,7 @@
             <div id="button2"><a href="#">회원 탈퇴</a></div>
         </div>
         <hr>
-        <h2>작성한 리뷰 목록</h2>
+        <h2 class="myReviewList_title">작성한 리뷰 목록</h2>
         <div class="myReviewList">
             <div class="myReview1">
                 <div class="top">
@@ -118,7 +130,7 @@
                 </div>
             </div>
         </div>
-        <h2>찜한 가게 목록</h2>
+        <h2 class="myBookMark_title">찜한 가게 목록</h2>
         <div class="myBookMark">
             <div class="myBookMark1">
                 <div class="top">
@@ -179,7 +191,7 @@
             </div>
         </div>
     </div>
-    
+
     <footer>
         <div class="top">
             <img src="./image/footer/logo.png">

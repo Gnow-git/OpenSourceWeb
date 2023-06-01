@@ -3,16 +3,12 @@ body {
     height: 100%;
 }
 
-#wrap {
-    min-height: 100%;
-    position: relative;
-}
-
 footer {
     height: 360px;
     position: relative;
     background-color: #112222;
     width: 100%;
+    zoom: 40%;  /** 사이즈 변경 */
 }
 
 .top {

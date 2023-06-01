@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,56 +10,34 @@
   <!--참조할 css 링크 주소-->
   <link rel="stylesheet" type="text/css" href="./style/header.css">
   <link rel="stylesheet" type="text/css" href="./style/intro.css">
+
+  <!--jQuery-->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+    integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+  
+  <!-- 다른 html을 포함할때 사용-->
+  <script type="text/javascript">
+    $(document).ready(function () {
+
+      $("#headers").load("header.html");  // 원하는 파일 경로를 삽입하면 된다
+      $("#footers").load("footer.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
+
+    });
+  </script>
+
 </head>
 
 <body>
-  <div id="wrap">
-    <header>
-      <!-----로고 + 검색창 + 로그인 + 회원가입----->
-      <img class="header_img" src="./image/logo/logo_header.png">
+  <div id="headers"></div>
 
-      <!--검색창-->
-      <label class="search">
-        <input type="text" placeholder="검색어 입력">
-        <!--돋보기 이미지이니, src 건들지 말 것--뒤에 post나 get작성할 것-->
-        <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
-      </label>
-      <span class="links">
-      <a href="#" right="40px" top="30px">로그인</a>
-      <a href="#">회원가입</a>
-    </span>
-    
-    </header>
-    <br>
-    <!-----내비게이션 바------>
-    <nav>
-      <ul class="place">
-        <li><a href="#intro">소개</a></li>
-        <li><a href="#">이용안내</a></li>
-        <li><a href="#">공지사항</a></li>
-        <li>
-          <a href="#">맛집조회</a>
-          <ul class="sub_place">
-            <li><a href="#">상당구</a></li>
-            <li><a href="#">청원구</a></li>
-            <li><a href="#">흥덕구</a></li>
-            <li><a href="#">서원구</a></li>
-          </ul>
-        </li>
-        <li><a href="#">마이페이지</a></li>
-      </ul>
-    </nav>
-  </div>
-    
-    
   <!--내용-->
   <div id="intro">
     <div class="topic">
       <img class="logo_garo" src="./image/logo/logo_garo.png"> 소개
     </div>
-    
-      <hr>
-      
+
+    <hr>
+
     <div class="content">
       <p class="big" align="center">청주에 맛집이 있나?</p>
 
@@ -71,6 +50,8 @@
 
       <img src="./image/logo/logo_garo.png" width="490">
     </div>
-      
+
+    <div id="footers"></div>
 </body>
+
 </html>

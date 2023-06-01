@@ -9,6 +9,8 @@
     height: 80%;
     display: flex;
     position: absolute;
+    zoom: 90%;
+    z-index: -1;
 }
 
 .myInformation img {
@@ -56,8 +58,15 @@ h2 {
     font-size: 30px;
 }
 
+/**추가한 코드_ header에 안가려지는거 수정*/
+.myReviewList_title {
+    position: relative;
+    z-index: -1;
+}
+
 .myReviewList {
     display: flex;
+    zoom: 90%;
 }
 
 .myReviewList .myReview1,
@@ -76,6 +85,7 @@ h2 {
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: #2b2a29;
+    z-index: -1;
 }
 
 .top {
@@ -87,7 +97,6 @@ h2 {
     left: 60px;
     transform: scale(1.5);
     position: absolute;
-    z-index: 1;
     display: flex;
     overflow: hidden;
     -webkit-text-fill-color: darkgray;
@@ -97,7 +106,6 @@ h2 {
     top: 30px;
     left: 60px;
     position: absolute;
-    z-index: 0;
     transform: scale(1.5);
 }
 
@@ -151,10 +159,17 @@ h2 {
     transform: translate(280px, -50px);
 }
 
+/**추가한 코드_ header에 안가려지는거 수정*/
+.myBookMark_title {
+    position: relative;
+    z-index: -1;
+}
+
 .myBookMark {
     top: 80px;
     left: 50px;
     display: flex;
+    zoom: 90%;
 }
 
 .myBookMark img {
