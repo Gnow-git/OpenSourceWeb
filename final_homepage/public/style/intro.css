@@ -1,0 +1,42 @@
+#intro > .topic{
+    margin-top: 20px;
+    font-size: 85px;
+    font-weight: 700;
+    color: #484849;
+    font-family: 'Inter';
+}
+
+
+#intro > .topic > .logo_garo{
+    margin-top: 160px;
+    margin-left: 30px;
+    width: 550px;
+    display: inline;
+}
+
+
+#intro > .topic > hr{
+    margin-top: 0;
+}
+
+
+#intro > .content{
+    text-align: center;
+    font-weight: 700;
+}
+
+#intro > .content > .big{
+    color: black;
+    font-family: 'Inter';
+    font-weight: 700;
+    font-size: 70px;
+}
+
+
+
+#intro > .content > .sub{
+    font-family: 'Inter';
+    color: #5e5e5f;
+    font-size: 40px;
+    font-weight: 700;
+}

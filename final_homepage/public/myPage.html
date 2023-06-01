@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="key.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <link rel="stylesheet" type="text/css" href="./style/header.css">
+    <link rel="stylesheet" type="text/css" href="./style/myPage.css">
+    <link rel="stylesheet" type="text/css" href="./style/footer.css">
+</head>
+
+<body>
+    <div id="wrap">
+        <!--header 불러오기-->
+        <div w3-include-html="header.html"></div>
+        <script>
+            /**header.html 화면에 나타나게 함*/
+            w3.includeHTML();
+        </script>
+
+        <!-- firebase용 코드 시작 -->
+        <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
+
+        <script>
+            var firebaseConfig = {
+                apiKey: firebase_Key,
+                authDomain: firebase_authDomain,
+                projectId: firebase_projectId,
+                storageBucket: firebase_storageBucket,
+                messagingSenderId: firebase_messagingSenderId,
+                appId: firebase_appId,
+                measurementId: firebase_measurementId
+            };
+
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+
+        </script>
+        <!--firebase용 코드 끝-->
+
+        <div class="myInformation">
+            <img src="./image/myPage/profile.png">
+            <h4>닉네임</h4>
+            <div id="button1"><a href="#">회원 정보 수정</a></div>
+            <div id="button2"><a href="#">회원 탈퇴</a></div>
+        </div>
+        <hr>
+        <h2>작성한 리뷰 목록</h2>
+        <div class="myReviewList">
+            <div class="myReview1">
+                <div class="top">
+                    <div class="star-ratings-fill space-x-2 text-lg" :style="{ width: ratingToPercent + '%' }">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <div class="star-ratings-base space-x-2 text-lg">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <div id="restaurant">가게이름</div>
+                    <div id="nickname">닉네임</div>
+                </div>
+                <hr>
+                <div class="rbottom">
+                    <img src="./image/myPage/picture.png">
+                    <p>본인이 쓴 리뷰</p>
+                </div>
+                <div class="button">
+                    <div id="button1"><a href="#">리뷰 삭제</a></div>
+                    <div id="button2"><a href="#">리뷰 수정</a></div>
+                </div>
+            </div>
+            <div class="myReview2">
+                <div class="top">
+                    <div class="star-ratings-fill space-x-2 text-lg" :style="{ width: ratingToPercent + '%' }">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <div class="star-ratings-base space-x-2 text-lg">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <div id="restaurant">가게이름</div>
+                    <div id="nickname">닉네임</div>
+                </div>
+                <hr>
+                <div class="rbottom">
+                    <img src="./image/myPage/picture.png">
+                    <p>본인이 쓴 리뷰</p>
+                </div>
+                <div class="button">
+                    <div id="button1"><a href="#">리뷰 삭제</a></div>
+                    <div id="button2"><a href="#">리뷰 수정</a></div>
+                </div>
+            </div>
+            <div class="myReview3">
+                <div class="top">
+                    <div class="star-ratings-fill space-x-2 text-lg" :style="{ width: ratingToPercent + '%' }">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <div class="star-ratings-base space-x-2 text-lg">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <div id="restaurant">가게이름</div>
+                    <div id="nickname">닉네임</div>
+                </div>
+                <hr>
+                <div class="rbottom">
+                    <img src="./image/myPage/picture.png">
+                    <p>본인이 쓴 리뷰</p>
+                </div>
+                <div class="button">
+                    <div id="button1"><a href="#">리뷰 삭제</a></div>
+                    <div id="button2"><a href="#">리뷰 수정</a></div>
+                </div>
+            </div>
+        </div>
+        <h2>찜한 가게 목록</h2>
+        <div class="myBookMark">
+            <div class="myBookMark1">
+                <div class="top">
+                    <div class="star-ratings-fill space-x-2 text-lg" :style="{ width: ratingToPercent + '%' }">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <div class="star-ratings-base space-x-2 text-lg">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <div id="restaurant">가게이름</div>
+                </div>
+                <hr>
+                <div class="bbottom">
+                    <img src="./image/myPage/picture.png">
+                    <div class="content">
+                        <p>찜한 가게의 대표 메뉴</p><br>
+                        <p>찜한 가게의 주소</p>
+                    </div>
+                </div>
+            </div>
+            <div class="myBookMark2">
+                <div class="top">
+                    <div class="star-ratings-fill space-x-2 text-lg" :style="{ width: ratingToPercent + '%' }">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <div class="star-ratings-base space-x-2 text-lg">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <div id="restaurant">가게이름</div>
+                </div>
+                <hr>
+                <div class="bbottom">
+                    <img src="./image/myPage/picture.png">
+                    <div class="content">
+                        <p>찜한 가게의 대표 메뉴</p><br>
+                        <p>찜한 가게의 주소</p>
+                    </div>
+                </div>
+            </div>
+            <div class="myBookMark3">
+                <div class="top">
+                    <div class="star-ratings-fill space-x-2 text-lg" :style="{ width: ratingToPercent + '%' }">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <div class="star-ratings-base space-x-2 text-lg">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <div id="restaurant">가게이름</div>
+                </div>
+                <hr>
+                <div class="bbottom">
+                    <img src="./image/myPage/picture.png">
+                    <div class="content">
+                        <p>찜한 가게의 대표 메뉴</p><br>
+                        <p>찜한 가게의 주소</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="top">
+            <img src="./image/footer/logo.png">
+            <h1>청주 맛집 스캔들</h1>
+            <p>청주 맛집의 모든 것</p>
+        </div>
+        <div class="medium">
+            <p>개발진: 안유빈, 이은서, 정선종, 이명국</p>
+            <p>소재지: 충청북도 청주시 서원구 충대로1 충북대학교 전자정보대학3관</p>
+            <p>이메일 문의: gnow@chungbuk.ac.kr</p>
+            <div class="right">
+                <h2><a href="#">사이트 소개</a></h2>
+                <h2>|</h2>
+                <h2><a href="#">이용 안내</a></h2>
+                <h2>|</h2>
+                <h2><a href="#">공지사항</a></h2>
+                <h2>|</h2>
+            </div>
+        </div>
+        <div class="bottom">
+            <p>©청주 맛집 스캔들 All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -5,9 +5,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <script src="key.js"></script>
-  <script src="https://www.w3schools.com/lib/w3.js"></script>
-  <link rel="stylesheet" type="text/css" href="style\header.css">
+
+  <!--참조할 css 링크 주소-->
+  <link rel="stylesheet" type="text/css" href="./style/header.css">
+  <link rel="stylesheet" type="text/css" href="./style/intro.css">
 </head>
 
 <body>
@@ -15,24 +16,24 @@
     <header>
       <!-----로고 + 검색창 + 로그인 + 회원가입----->
       <img class="header_img" src="./image/logo/logo_header.png">
+
+      <!--검색창-->
       <label class="search">
         <input type="text" placeholder="검색어 입력">
         <!--돋보기 이미지이니, src 건들지 말 것--뒤에 post나 get작성할 것-->
         <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
       </label>
       <span class="links">
-      <!-- 이부분 수정 id 지정 팀원에게 알려줄것 -->
-      <a id = "user_login" href="login.html" right="40px" top="30px">로그인</a>
-      <a id = "user_sign_up" href="#">회원가입</a>
+      <a href="#" right="40px" top="30px">로그인</a>
+      <a href="#">회원가입</a>
     </span>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    
     </header>
-
     <br>
     <!-----내비게이션 바------>
     <nav>
       <ul class="place">
-        <li><a href="intro.html">소개</a></li>
+        <li><a href="#intro">소개</a></li>
         <li><a href="#">이용안내</a></li>
         <li><a href="#">공지사항</a></li>
         <li>
@@ -44,9 +45,32 @@
             <li><a href="#">서원구</a></li>
           </ul>
         </li>
-        <li><a id="myPage" href="#">마이페이지</a></li>
+        <li><a href="#">마이페이지</a></li>
       </ul>
     </nav>
   </div>
+    
+    
+  <!--내용-->
+  <div id="intro">
+    <div class="topic">
+      <img class="logo_garo" src="./image/logo/logo_garo.png"> 소개
+    </div>
+    
+      <hr>
+      
+    <div class="content">
+      <p class="big" align="center">청주에 맛집이 있나?</p>
+
+      <p class="sub">청주 음식은 맛이 없다고 투덜거리는 당신</p>
+      <p class="sub">코앞에 있는 맛집을 놓치는 당신</p>
+
+      <br><br><br>
+
+      <p class="big" align="center">그런 당신을 위한 홈페이지</p>
+
+      <img src="./image/logo/logo_garo.png" width="490">
+    </div>
+      
 </body>
 </html>
