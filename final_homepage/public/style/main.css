@@ -234,3 +234,53 @@ color: #3F443F;
   border: 1px solid transparent;
   line-height: 1.5;
 }
+
+/** 음식 추천 화면 css food_pick*/
+
+#food_pick{
+  position: absolute;
+  width: 720px;
+  height: 372px;
+  left: 356px;
+  top: 338px;
+  
+  background: #FFFFFF;
+  border: 3px solid #E5EEE4;
+  z-index: -1;
+}
+
+.food_pick_title{
+  position: absolute;
+width: auto;
+height: 48px;
+left: 395px;
+top: 315px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 40px;
+line-height: 48px;
+text-align: center;
+
+color: #3F443F;
+
+background-color: #FFFFFF;
+}
+
+#food{
+  position: absolute;
+width: 194px;
+height: 63px;
+left: 623px;
+top: 493px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 50px;
+line-height: 61px;
+text-align: center;
+
+color: rgba(0, 0, 0, 0.34);
+}
