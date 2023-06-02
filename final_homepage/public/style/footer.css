@@ -9,6 +9,7 @@ footer {
     background-color: #112222;
     width: 100%;
     zoom: 40%;  /** 사이즈 변경 */
+    clear:both;
 }
 
 .top {
