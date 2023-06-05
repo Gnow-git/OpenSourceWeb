@@ -189,7 +189,7 @@ color: #3F443F;
 .sign_up {
   position: absolute;
   top: 300px;
-  left: 50px;
+  left: 500px;
   width: 500px;
 }
 
@@ -208,7 +208,7 @@ color: #3F443F;
 .login {
   position: absolute;
   top: 500px;
-  left: 50px;
+  left: 500px;
   width: 500px;
 }
 
@@ -216,8 +216,8 @@ color: #3F443F;
 
 .post_form{
   position: absolute;
-  top : 300px;
-  left: 500px;
+  top : 400px;
+  left: 400px;
   width: 984px;
   display: flex;
   justify-content: center;
@@ -234,7 +234,7 @@ color: #3F443F;
 }
 .pagination {
   position: absolute;
-  top: 400px;
+  top: 200px;
 }
 
 .pagination a {

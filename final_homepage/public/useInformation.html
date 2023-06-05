@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="./style/header.css">
+    <link rel="stylesheet" type="text/css" href="./style/useInformation.css">
+
+        <!--jQuery-->
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    
+       <!-- 다른 html을 포함할때 사용-->
+  <script type="text/javascript">
+    $(document).ready(function () {
+
+      $("#headers").load("header.html");  // 원하는 파일 경로를 삽입하면 된다
+      $("#footers").load("footer.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
+
+    });
+  </script>
+</head>
+
+<body>
+    <div id="headers"></div>
+    <div id="wrap">
+        
+
+        <body>
+            <div id="lookUpMethod">
+                <h1>맛집 조회 방법</h1>
+                <div class="line">
+                </div>
+                <h2>검색</h2>
+                <img class="method1" src="./image/useInformation/method1.png">
+                <h4>직접 가게 이름을 입력하여 찾을 수 있습니다.</h4>
+                <h2>사이트 추천</h2>
+                <img class="method2" src="./image/useInformation/method2.png">
+                <h4>원하는 구역을 선택하여 사이트에서 제공하는 맛집을 찾을 수 있습니다.</h4>
+            </div>
+            <div id="menu">
+                <h1>메뉴창</h1>
+                <div class="line">
+                </div>
+                <h2>소개</h2>
+                <h4>전반적인 웹 사이트를 소개하는 창입니다.</h4>
+                <h2>맛집 조회</h2>
+                <h4>지역 별로 원하는 맛집을 추천받을 수 있는 창입니다.</h4>
+                <h2>마이페이지</h2>
+                <h4>조회한 맛집 기록을 볼 수 있는 창입니다.</h4>
+            </div>
+            <div id="question">
+                <h1>문의사항</h1>
+                <div class="line">
+                </div>
+                <h2>이메일 문의</h2>
+                <h4>asd1234@semy.com</h4>
+                <h2>전화 문의</h2>
+                <h4>043-286-1234</h4>
+                <h4>(평일 14:00 ~ 16:00, 주말/공휴일 제외)</h4>
+            </div>
+        </body>
+    </div>
+</body>
+
+</html>
