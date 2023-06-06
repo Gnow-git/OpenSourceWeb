@@ -1,0 +1,50 @@
+/* 공지사항 notice.html css */
+
+/* 요소 가운데 정렬 */
+.board_wrap{
+  display: grid;
+  place-items: center;
+}
+
+.post_form{
+    position: absolute;
+    top : 400px;
+    width: 1000px;
+    display: flex;
+    justify-content: center;  /* 요소 가운데 정렬 */
+    padding: 30px;
+  }
+  
+  .post_head {
+    background-color:transparent; /* 투명하게 */
+    text-align: center;
+    border-top: 1px solid #000;
+  }
+
+  .post_head > th{
+    margin-left: 100px;
+  }
+
+  .post_body {
+    text-align: center;
+  }
+
+  /* 하단 번호 레이아웃 */
+  .pagination {
+    position: absolute;
+    display: flex;
+    list-style: none;
+    top: 150px;
+  }
+  
+  .pagination a {
+    display: block;
+    font-size: 14px;
+    margin : 10px;
+    text-decoration: none;
+    padding: 5px 12px;
+    color: #fff;
+    margin-left: -1px;
+    border: 1px solid transparent;
+    line-height: 1.5;
+  }

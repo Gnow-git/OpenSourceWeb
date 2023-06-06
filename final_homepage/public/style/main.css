@@ -212,43 +212,6 @@ color: #3F443F;
   width: 500px;
 }
 
-/** 공지사항 notice.html css*/
-
-.post_form{
-  position: absolute;
-  top : 400px;
-  left: 400px;
-  width: 984px;
-  display: flex;
-  justify-content: center;
-  margin: 0 auto;
-}
-
-.post_head {
-  background-color: #D9D9D9;
-  text-align: center;
-}
-
-.post_body {
-  text-align: center;
-}
-.pagination {
-  position: absolute;
-  top: 200px;
-}
-
-.pagination a {
-  display: block;
-  font-size: 14px;
-  margin : 10px;
-  text-decoration: none;
-  padding: 5px 12px;
-  color: #fff;
-  margin-left: -1px;
-  border: 1px solid transparent;
-  line-height: 1.5;
-}
-
 /** 음식 추천 화면 css food_pick*/
 
 #food_pick {
