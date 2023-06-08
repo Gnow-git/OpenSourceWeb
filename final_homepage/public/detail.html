@@ -1,75 +1,104 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <script src="key.js"></script>
-  <!--bootstrap-->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="\main.css">
+  <link rel="stylesheet" type="text/css" href="style\detail.css">
+
+  <!-- 지도 설정 js -->
+  <script type="module" src="./index.js"></script>
+  <!-- 다른 html을 포함할때 사용-->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+    integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+
+      $("#headers").load("header.html");  // 원하는 파일 경로를 삽입하면 된다
+      $("#footers").load("footer.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
+
+    });
+  </script>
+
 </head>
 
 <body>
-<!--firebase용 코드 시작-->
-<script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
 
-<script>
-var firebaseConfig = {
-    apiKey: firebase_Key,
-    authDomain: firebase_authDomain,
-    projectId: firebase_projectId,
-    storageBucket: firebase_storageBucket,
-    messagingSenderId: firebase_messagingSenderId,
-    appId: firebase_appId,
-    measurementId: firebase_measurementId
-};
+  <div id="headers"></div>
+  <!--firebase용 코드 시작-->
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+  <script>
+    var firebaseConfig = {
+      apiKey: firebase_Key,
+      authDomain: firebase_authDomain,
+      projectId: firebase_projectId,
+      storageBucket: firebase_storageBucket,
+      messagingSenderId: firebase_messagingSenderId,
+      appId: firebase_appId,
+      measurementId: firebase_measurementId
+    };
 
-</script>
-<!--firebase용 코드 끝-->
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
 
-<!--bootstrap-->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-
-<!--jQuery-->
-<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
-
-  <div class="container">
-    상세페이지
-    <div class="detail-pic my-4" style="background-image: url('https://placeimg.com/640/380/tech');"></div>
-    <div>
-      <h5 class="author">올린사람</h5>
-      <hr>
-      <h5 class="title">식당명</h5>
-      <p class="content">내용</p>
-      <p class="price">가격</p>
+  </script>
+  <!--firebase용 코드 끝-->
+<div class="detail_wrap">
+    <div class="review_wrap">
+      <div id="food_img" style="background-image: url('image/detail/test_img.jpg')"></div>
+      <div class="review_info">
+        <p class="food">음식명 : <span class="food_e">음식 이름</span> </p>
+        <p class="price">금액 : <span class="price_e">0000</span> 원</p>
+        <p class="review">음식 리뷰 : <span class="review_e">음식 소개</span> </p>
+        <p class="writer">작성자 : <span class="writer_e">홍길동</span> </p>
+      </div>
+      <div class="review_button">
+        <button class="reivew_modify">리뷰 수정</button>
+        <button class="chat">대화하기</button>
+      </div>
     </div>
-    <button class="btn btn-outline-secondary" id="edit">수정</button>
-    <button class="btn btn-outline-secondary" id="chat">채팅</button>
-</div>
 
-<script>
+    <div class="review_map_wrap">
+      <!-- 맵 -->
+      <div id="map"></div>
+      <div class="review_info">
+        <p class="restaurant">가게명 : <span class="restaurant_e">000 가게</span> </p>
+        <p class="location">지역 : <span class="location_e">충북 청주시 00구</span> </p>
+        <p class="address">주소 : <span class="address_e">충북 청주시 00구 00로</span> </p>
+      </div>
+      <div class="review_button">
+        <button class="map">전체 지도 보기</button>
+      </div>
+      <!-- 나중에 api 키 숨겨야함 -->
+      <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-EDA23Mw9stTlyBrFiHlMquvdns6zGPQ&callback=initMap&v=weekly"
+        defer></script>
+    </div>
+</div>
+  <script>
     const db = firebase.firestore();
     const storage = firebase.storage();
 
     // 유저 정보 확인
     var userinfo = localStorage.getItem('user')
-     if (userinfo){
-       userinfo = JSON.parse(userinfo);
-       $('#userName').html(userinfo.displayName);
-     }
+    if (userinfo) {
+      userinfo = JSON.parse(userinfo);
+      $('#userName').html(userinfo.displayName);
+    }
 
     var querystring = new URLSearchParams(window.location.search) // 쿼리스트링 문자열 -> 오브젝트로 변환
 
-    db.collection('product').doc(querystring.get('id')).get().then((result)=>{
-      
+    db.collection('product').doc(querystring.get('id')).get().then((result) => {
+
       uploaduid = result.data().uid;
       title = result.data().식당명;
 
@@ -77,30 +106,15 @@ firebase.initializeApp(firebaseConfig);
       $('.title').html(result.data().식당명)
       $('.price').html(result.data().가격 + '원')
       $('.content').html(result.data().내용)
-      $('.detail-pic').css('background-image', `url(${result.data().이미지})`)
+      $('#food_img').css('background-image', `url(${result.data().이미지})`)
     })
 
-    $('#edit').click(function(){
+    $('#edit').click(function () {
       window.location.href = 'edit.html?id=' + querystring.get('id')
     })
 
-    // 채팅
-    var uploaduid;
-    var title;
-    var loginuid = JSON.parse(localStorage.getItem('user')).uid
-
-    $('#chat').click(function(){
-      var 데이터 = {
-        who : [loginuid, uploaduid],
-        product : title,
-        date : new Date()
-      }
-      db.collection('chatroom').add(데이터).then((result)=>{
-        location.href = "chat.html";
-      })
-    })
-
-</script>
+  </script>
 
 </body>
+
 </html>
