@@ -1,94 +1,107 @@
 /*-------------------전체에 적용할 것----------------------*/
-#wrap{
-  white-space: nowrap;
-  overflow: auto;
-}
+
+
+
 
 /*--------------------헤더----------------------*/
 /*----로고 + 검색창 + 로그인 + 회원가입-----*/
+/* html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+} */
 
 header {
-position: fixed;
-left: 0;
-top: 0;
-width: 100%;
-height: 130px;
-z-index: 100;
-display: inline;
-background-color: white;
+  width: 100%;
+  height: fit-content;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 100px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  background-color: white;
 }
 
-header > a > .header_img{
-width:130px;
-height:80px;
-margin-left: 90px;
-margin-top: 20px;
-margin-right: 40px;
-display: inline-block;
-z-index: 100;
+header > .header_img{
+  width:130px;
+  height:80px;
+  margin-right: 50px;
 }
+
 
 /*---------------검색 부분---------------*/
 header > .search{
-position: fixed;
-padding-top: 20px;
-display: inline;
-margin-top: 15px
+  /* position: fixed; */
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /*------------검색창------------*/
 header > .search > input {
-position: fixed;
-width: 700px;
-height: 30px;
-border: 1px solid #F1F1F1;
-background-color: #F1F1F1;
-border-radius: 30px;
-padding: 10px 12px;
-font-size: 15px;  /*검색창 높이 이걸로 조절함*/
-display: inline;
+  width: 100%;
+  height: 30px;
+  border: 1px solid #F1F1F1;
+  background-color: #F1F1F1;
+  border-radius: 30px;
+  padding: 10px 12px;
+  font-size: 15px;  /*검색창 높이 이걸로 조절함*/
+}
+
+header > .search > a {
+  position: relative;
+  right: 40px;
 }
 
 /*------------돋보기------------*/
 header > .search > a > img {
-position : fixed;
-width: 17px;
-left: 900px;
-margin: 0;
-margin-top: 15px;
-display: inline;
+  /* position : fixed; */
+  width: 17px;
 }
 
 /*------------엔터 눌러도 검색하도록 하는 jquery 필요------------*/
 
+
+
 header > p > a{
 top: 10;
 right: -25px;
-display: inline;
+display: inline; 
 }
+
 
 /*------------로그인 및 회원가입------------*/
 header > .links {
-  margin-top: 20px;
-  left: 1200px;
-  position: fixed;
-  top: 30px;
-  right: 50px; /* 오른쪽 여백 조정 */
+  width: 170px;
+  display: flex;
+  margin-left: 50px;
+  padding: 0px;
+  flex-direction: row;
+  justify-content: space-between;
+  list-style-type: none;
 }
 
-header > .links > a {
-  margin-left: 40px;
+header > .links > li {
+  margin: 0px 5px;
 }
-
 
 /*--------------------내비게이션 바----------------------*/
 nav {
-position: fixed; /** 수정 위치 원래는 fixed*/
-padding-top: 80px;
-/*margin-left: 40%;*/
-width: 100%;
-height: 60px;
-z-index: 100;
+  position: fixed;
+  padding-top: 94px;
+  /*margin-left: 40%;*/
+  width: 100%;
+  height: 50px;
+  padding-bottom: 0px;
+  text-align: center;
 }
 
 
@@ -102,67 +115,80 @@ nav > .place {
   width: 100%;
   z-index: 100;
   color: white;
+  line-height: 50px;
+  text-align: center;
 }
+
 
 .place > li {
-float: left;
-width: 18%;
-position: relative;
-color: white;
+  float: left;
+  width: 18%;
+  position: relative;
+  color: white;
+  line-height: 50px;
+  text-align: center;
 }
+
 
 .place > li > a {
-display: block;
-height: 60px;
-line-height: 60px;
-font-size: 20px;
-font-weight: 700;
-transition: all 0.4s;
-color: white;
-text-align: center;
-cursor: pointer;
-}
-
-.sub_place > ul{
-position: absolute;
- /*subplace 너비 및 스타일 지정*/
- left: -2;
-list-style: none;
-display: none;
-background-color: #2E2E2F;
-box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-padding: 10px;
-z-index: 1;
-color: white;
+  display: block;
+  /* height: 60px; */
+  line-height: 50px;
+  font-size: 20px;
+  font-weight: 700;
+  transition: all 0.4s;
+  color: white;
+  text-align: center;
+  cursor: pointer;
 }
 
 
-
-.sub_place > li > a{
- color: white;
+.sub_place ul{
+  position: absolute;
+  
+  /*subplace 너비 및 스타일 지정*/
+  left: -4%;
+  list-style: none;
+  display: none;
+  background-color: #2E2E2F;
+  color: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  z-index: 1;
 }
 
 
-.sub_place > li > a {
-height: 40px;
-line-height: 20px;
-font-size: 20px;
-color: #0c3055;
-font-weight: 700;
-text-align: center;
-transition: all 0.4s ease-in-out;
+
+.sub_place li{
+  height: 40px;
+  line-height: 20px;
+  font-size: 20px;
+  color: white;
+  font-weight: 700;
+  text-align: center;
+  transition: all 0.4s ease-in-out;
+} 
+
+/* sub_space 글씨색 지정 */
+.sub_place > ul > li > a{
+  color: white;
 }
+
 
 .place li .sub_place{
   visibility: hidden;
   position: absolute;
   display: none;
+  color: white;
 }
 
+
+
 .place li .sub_place li{
-  clear: both;
+  clear:both;
   width: 100%;
 }
+
 
 
 /*-----내비게이션 추가 내용-----*/
@@ -171,8 +197,12 @@ transition: all 0.4s ease-in-out;
   width:100%;
 }
 
+.sub_place{
+  color: white;
+}
+
 /*--------------------내비게이션 바 font 속성----------------------*/
 a:link{color:black; text-decoration:none;}
 a:visited{color:black; text-decoration:none;}
-a:hover{color:black; text-decoration:none;}
+a:hover{color:black; text-decoration:ba;}
 a:active{color:black; text-decoration:none;}
