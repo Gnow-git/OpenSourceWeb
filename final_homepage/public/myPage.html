@@ -5,58 +5,51 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="key.js"></script>
-    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <title>myPage</title>
     <link rel="stylesheet" type="text/css" href="./style/header.css">
     <link rel="stylesheet" type="text/css" href="./style/myPage.css">
     <link rel="stylesheet" type="text/css" href="./style/footer.css">
-
-    <!--jQuery-->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
-        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
-
-    <!-- 다른 html을 포함할때 사용-->
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            $("#headers").load("header.html");  // 원하는 파일 경로를 삽입하면 된다
-            $("#footers").load("footer.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
-
-        });
-    </script>
+    <script type="text/javascript" src="./script/myPage.js"></script>
 </head>
 
-<body>
-
+<body style="overflow-x: hidden" onLoad="showReviewSlides(); showBookMarkSlides();">
     <div id="wrap">
-
-    <!--header 불러오기-->
-    <div id="headers"></div>
-    
-        <!-- firebase용 코드 시작 -->
-        <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
-
-        <script>
-            var firebaseConfig = {
-                apiKey: firebase_Key,
-                authDomain: firebase_authDomain,
-                projectId: firebase_projectId,
-                storageBucket: firebase_storageBucket,
-                messagingSenderId: firebase_messagingSenderId,
-                appId: firebase_appId,
-                measurementId: firebase_measurementId
-            };
-
-            // Initialize Firebase
-            firebase.initializeApp(firebaseConfig);
-
-        </script>
-        <!--firebase용 코드 끝-->
-
+        <header>
+            <!-----로고 + 검색창 + 로그인 + 회원가입----->
+            <img class="header_img" src="./image/logo/logo_header.png">
+            <label class="search">
+                <input type="text" placeholder="검색어 입력">
+                <!--돋보기 이미지이니, src 건들지 말 것--뒤에 post나 get작성할 것-->
+                <a href="#">
+                    <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+                </a>
+            </label>
+            <ul class="links">
+                <li>
+                    <a href="#" right="40px" top="30px">로그인</a>
+                </li>
+                <li>
+                    <a href="#">회원가입</a>
+                </li>
+            </ul>
+        </header>
+        <!-----내비게이션 바------>
+        <nav>
+            <ul class="place">
+                <li><a href="#">소개</a></li>
+                <li><a href="#">이용안내</a></li>
+                <li><a href="#">공지사항</a></li>
+                <li class="sub_place"><a href="#">맛집조회</a>
+                    <ul>
+                        <li><a href="#">상당구</a></li>
+                        <li><a href="#">청원구</a></li>
+                        <li><a href="#">흥덕구</a></li>
+                        <li><a href="#">서원구</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">마이페이지</a></li>
+            </ul>
+        </nav>
         <div class="myInformation">
             <img src="./image/myPage/profile.png">
             <h4>닉네임</h4>
@@ -64,155 +57,415 @@
             <div id="button2"><a href="#">회원 탈퇴</a></div>
         </div>
         <hr>
-        <h2 class="myReviewList_title">작성한 리뷰 목록</h2>
+        <h2 id="reviewH2">작성한 리뷰 목록</h2>
         <div class="myReviewList">
-            <div class="myReview1">
-                <div class="top">
-                    <div class="star-ratings-fill space-x-2 text-lg" :style="{ width: ratingToPercent + '%' }">
-                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            <img id="leftArrow" src="./image/myPage/leftArrow.png" onClick="reviewSlides(-1)">
+            <img id="rightArrow" src="./image/myPage/rightArrow.png" onClick="reviewSlides(1)">
+            <div class="myReview fade">
+                <div class="review">
+                    <div class="top">
+                        <div class="star-ratings-fill space-x-2 text-lg" :style="{width: ratingToPercent + '%' }">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div class="star-ratings-base space-x-2 text-lg">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div id="restaurant">멘야마쯔리</div>
+                        <div id="nickname">서원구</div>
                     </div>
-                    <div class="star-ratings-base space-x-2 text-lg">
-                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    <hr>
+                    <div class="rbottom">
+                        <img src="./image/myPage/food1.jpg">
+                        <p>본인이 쓴 리뷰</p>
                     </div>
-                    <div id="restaurant">가게이름</div>
-                    <div id="nickname">닉네임</div>
+                    <div class="button">
+                        <div id="button1"><a href="#">리뷰 삭제</a></div>
+                        <div id="button2"><a href="#">리뷰 수정</a></div>
+                    </div>
                 </div>
-                <hr>
-                <div class="rbottom">
-                    <img src="./image/myPage/picture.png">
-                    <p>본인이 쓴 리뷰</p>
+                <div class="review">
+                    <div class="top">
+                        <div class="star-ratings-fill space-x-2 text-lg" :style="{width: ratingToPercent + '%' }">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div class="star-ratings-base space-x-2 text-lg">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div id="restaurant">봉용불고기</div>
+                        <div id="nickname">상당구</div>
+                    </div>
+                    <hr>
+                    <div class="rbottom">
+                        <img src="./image/myPage/food2.jpg">
+                        <p>본인이 쓴 리뷰</p>
+                    </div>
+                    <div class="button">
+                        <div id="button1"><a href="#">리뷰 삭제</a></div>
+                        <div id="button2"><a href="#">리뷰 수정</a></div>
+                    </div>
                 </div>
-                <div class="button">
-                    <div id="button1"><a href="#">리뷰 삭제</a></div>
-                    <div id="button2"><a href="#">리뷰 수정</a></div>
+                <div class="review">
+                    <div class="top">
+                        <div class="star-ratings-fill space-x-2 text-lg" :style="{width: ratingToPercent + '%' }">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div class="star-ratings-base space-x-2 text-lg">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div id="restaurant">동백카츠</div>
+                        <div id="nickname">청원구</div>
+                    </div>
+                    <hr>
+                    <div class="rbottom">
+                        <img src="./image/myPage/food3.jpeg">
+                        <p>본인이 쓴 리뷰</p>
+                    </div>
+                    <div class="button">
+                        <div id="button1"><a href="#">리뷰 삭제</a></div>
+                        <div id="button2"><a href="#">리뷰 수정</a></div>
+                    </div>
                 </div>
             </div>
-            <div class="myReview2">
-                <div class="top">
-                    <div class="star-ratings-fill space-x-2 text-lg" :style="{ width: ratingToPercent + '%' }">
-                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            <div class="myReview fade">
+                <div class="review">
+                    <div class="top">
+                        <div class="star-ratings-fill space-x-2 text-lg" :style="{width: ratingToPercent + '%' }">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div class="star-ratings-base space-x-2 text-lg">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div id="restaurant">장군집</div>
+                        <div id="nickname">흥덕구</div>
                     </div>
-                    <div class="star-ratings-base space-x-2 text-lg">
-                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    <hr>
+                    <div class="rbottom">
+                        <img src="./image/myPage/food4.jpeg">
+                        <p>본인이 쓴 리뷰</p>
                     </div>
-                    <div id="restaurant">가게이름</div>
-                    <div id="nickname">닉네임</div>
+                    <div class="button">
+                        <div id="button1"><a href="#">리뷰 삭제</a></div>
+                        <div id="button2"><a href="#">리뷰 수정</a></div>
+                    </div>
                 </div>
-                <hr>
-                <div class="rbottom">
-                    <img src="./image/myPage/picture.png">
-                    <p>본인이 쓴 리뷰</p>
+                <div class="review">
+                    <div class="top">
+                        <div class="star-ratings-fill space-x-2 text-lg" :style="{width: ratingToPercent + '%' }">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div class="star-ratings-base space-x-2 text-lg">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div id="restaurant">권가제면소</div>
+                        <div id="nickname">서원구</div>
+                    </div>
+                    <hr>
+                    <div class="rbottom">
+                        <img src="./image/myPage/food5.jpg">
+                        <p>본인이 쓴 리뷰</p>
+                    </div>
+                    <div class="button">
+                        <div id="button1"><a href="#">리뷰 삭제</a></div>
+                        <div id="button2"><a href="#">리뷰 수정</a></div>
+                    </div>
                 </div>
-                <div class="button">
-                    <div id="button1"><a href="#">리뷰 삭제</a></div>
-                    <div id="button2"><a href="#">리뷰 수정</a></div>
+                <div class="review">
+                    <div class="top">
+                        <div class="star-ratings-fill space-x-2 text-lg" :style="{width: ratingToPercent + '%' }">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div class="star-ratings-base space-x-2 text-lg">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div id="restaurant">킨토토쇼바</div>
+                        <div id="nickname">상당구</div>
+                    </div>
+                    <hr>
+                    <div class="rbottom">
+                        <img src="./image/myPage/food6.jpg">
+                        <p>본인이 쓴 리뷰</p>
+                    </div>
+                    <div class="button">
+                        <div id="button1"><a href="#">리뷰 삭제</a></div>
+                        <div id="button2"><a href="#">리뷰 수정</a></div>
+                    </div>
                 </div>
             </div>
-            <div class="myReview3">
-                <div class="top">
-                    <div class="star-ratings-fill space-x-2 text-lg" :style="{ width: ratingToPercent + '%' }">
-                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            <div class="myReview fade">
+                <div class="review">
+                    <div class="top">
+                        <div class="star-ratings-fill space-x-2 text-lg" :style="{width: ratingToPercent + '%' }">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div class="star-ratings-base space-x-2 text-lg">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div id="restaurant">목구멍</div>
+                        <div id="nickname">흥덕구</div>
                     </div>
-                    <div class="star-ratings-base space-x-2 text-lg">
-                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    <hr>
+                    <div class="rbottom">
+                        <img src="./image/myPage/food7.jpg">
+                        <p>본인이 쓴 리뷰</p>
                     </div>
-                    <div id="restaurant">가게이름</div>
-                    <div id="nickname">닉네임</div>
+                    <div class="button">
+                        <div id="button1"><a href="#">리뷰 삭제</a></div>
+                        <div id="button2"><a href="#">리뷰 수정</a></div>
+                    </div>
                 </div>
-                <hr>
-                <div class="rbottom">
-                    <img src="./image/myPage/picture.png">
-                    <p>본인이 쓴 리뷰</p>
+                <div class="review">
+                    <div class="top">
+                        <div class="star-ratings-fill space-x-2 text-lg" :style="{width: ratingToPercent + '%' }">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div class="star-ratings-base space-x-2 text-lg">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div id="restaurant">삼동소바</div>
+                        <div id="nickname">서원구</div>
+                    </div>
+                    <hr>
+                    <div class="rbottom">
+                        <img src="./image/myPage/food8.jpg">
+                        <p>본인이 쓴 리뷰</p>
+                    </div>
+                    <div class="button">
+                        <div id="button1"><a href="#">리뷰 삭제</a></div>
+                        <div id="button2"><a href="#">리뷰 수정</a></div>
+                    </div>
                 </div>
-                <div class="button">
-                    <div id="button1"><a href="#">리뷰 삭제</a></div>
-                    <div id="button2"><a href="#">리뷰 수정</a></div>
+                <div class="review">
+                    <div class="top">
+                        <div class="star-ratings-fill space-x-2 text-lg" :style="{width: ratingToPercent + '%' }">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div class="star-ratings-base space-x-2 text-lg">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div id="restaurant">장원갑 샤브칼국수</div>
+                        <div id="nickname">서원구</div>
+                    </div>
+                    <hr>
+                    <div class="rbottom">
+                        <img src="./image/myPage/food9.jpeg">
+                        <p>본인이 쓴 리뷰</p>
+                    </div>
+                    <div class="button">
+                        <div id="button1"><a href="#">리뷰 삭제</a></div>
+                        <div id="button2"><a href="#">리뷰 수정</a></div>
+                    </div>
                 </div>
             </div>
+            <img id="pause" src="./image/myPage/pause.png" onClick="stopReview()">
+            <img id="play" src="./image/myPage/play.png" onClick="showReviewSlides()">
         </div>
-        <h2 class="myBookMark_title">찜한 가게 목록</h2>
-        <div class="myBookMark">
-            <div class="myBookMark1">
-                <div class="top">
-                    <div class="star-ratings-fill space-x-2 text-lg" :style="{ width: ratingToPercent + '%' }">
-                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        <h2 id="bookMarkH2">찜한 가게 목록</h2>
+        <div class="myBookMarkList">
+            <img id="leftArrow" src="./image/myPage/leftArrow.png" onClick="bookMarkSlides(-1)">
+            <img id="rightArrow" src="./image/myPage/rightArrow.png" onClick="bookMarkSlides(1)">
+            <div class="myBookMark fade">
+                <div class="bookMark">
+                    <div class="top">
+                        <div class="star-ratings-fill space-x-2 text-lg" :style="{width: ratingToPercent + '%' }">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div class="star-ratings-base space-x-2 text-lg">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div id="restaurant">다성식당</div>
                     </div>
-                    <div class="star-ratings-base space-x-2 text-lg">
-                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    <hr>
+                    <div class="bbottom">
+                        <img src="./image/myPage/food10.png">
+                        <div class="content">
+                            <p>청국장, 해물순두부</p><br>
+                            <p>충청북도 청주시 흥덕구 <br>예체로179번길 4</p>
+                        </div>
                     </div>
-                    <div id="restaurant">가게이름</div>
                 </div>
-                <hr>
-                <div class="bbottom">
-                    <img src="./image/myPage/picture.png">
-                    <div class="content">
-                        <p>찜한 가게의 대표 메뉴</p><br>
-                        <p>찜한 가게의 주소</p>
+                <div class="bookMark">
+                    <div class="top">
+                        <div class="star-ratings-fill space-x-2 text-lg" :style="{width: ratingToPercent + '%' }">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div class="star-ratings-base space-x-2 text-lg">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div id="restaurant">하나노세이슌</div>
+                    </div>
+                    <hr>
+                    <div class="bbottom">
+                        <img src="./image/myPage/food11.jpg">
+                        <div class="content">
+                            <p>일본가정식카레, 비프타다끼</p><br>
+                            <p>충청북도 청주시 상당구 <br>교서로32번길 20</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bookMark">
+                    <div class="top">
+                        <div class="star-ratings-fill space-x-2 text-lg" :style="{width: ratingToPercent + '%' }">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div class="star-ratings-base space-x-2 text-lg">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div id="restaurant">킨토토바</div>
+                    </div>
+                    <hr>
+                    <div class="bbottom">
+                        <img src="./image/myPage/food12.jpg">
+                        <div class="content">
+                            <p>마제소바</p><br>
+                            <p>충청북도 청주시 상당구 <br>사직대로361번길 27-4</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="myBookMark2">
-                <div class="top">
-                    <div class="star-ratings-fill space-x-2 text-lg" :style="{ width: ratingToPercent + '%' }">
-                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            <div class="myBookMark fade">
+                <div class="bookMark">
+                    <div class="top">
+                        <div class="star-ratings-fill space-x-2 text-lg" :style="{width: ratingToPercent + '%' }">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div class="star-ratings-base space-x-2 text-lg">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div id="restaurant">코끼리만두</div>
                     </div>
-                    <div class="star-ratings-base space-x-2 text-lg">
-                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    <hr>
+                    <div class="bbottom">
+                        <img src="./image/myPage/food13.jpg">
+                        <div class="content">
+                            <p>만두, 만두전골</p><br>
+                            <p>충청북도 청주시 상당구 <br>남사로 133-5</p>
+                        </div>
                     </div>
-                    <div id="restaurant">가게이름</div>
                 </div>
-                <hr>
-                <div class="bbottom">
-                    <img src="./image/myPage/picture.png">
-                    <div class="content">
-                        <p>찜한 가게의 대표 메뉴</p><br>
-                        <p>찜한 가게의 주소</p>
+                <div class="bookMark">
+                    <div class="top">
+                        <div class="star-ratings-fill space-x-2 text-lg" :style="{width: ratingToPercent + '%' }">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div class="star-ratings-base space-x-2 text-lg">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div id="restaurant">삼영부속구이</div>
+                    </div>
+                    <hr>
+                    <div class="bbottom">
+                        <img src="./image/myPage/food14.jpg">
+                        <div class="content">
+                            <p>돼지 염통, 뽈살</p><br>
+                            <p>충청북도 청주시 서원구 <br>사직대로104번길 22-1</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bookMark">
+                    <div class="top">
+                        <div class="star-ratings-fill space-x-2 text-lg" :style="{width: ratingToPercent + '%' }">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div class="star-ratings-base space-x-2 text-lg">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div id="restaurant">동백카츠</div>
+                    </div>
+                    <hr>
+                    <div class="bbottom">
+                        <img src="./image/myPage/food15.jpeg">
+                        <div class="content">
+                            <p>등심카츠,안심카츠</p><br>
+                            <p>충청북도 청주시 청원구 <br>오창읍 양청리 819-1</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="myBookMark3">
-                <div class="top">
-                    <div class="star-ratings-fill space-x-2 text-lg" :style="{ width: ratingToPercent + '%' }">
-                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            <div class="myBookMark fade">
+                <div class="bookMark">
+                    <div class="top">
+                        <div class="star-ratings-fill space-x-2 text-lg" :style="{width: ratingToPercent + '%' }">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div class="star-ratings-base space-x-2 text-lg">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div id="restaurant">카마타케제면소</div>
                     </div>
-                    <div class="star-ratings-base space-x-2 text-lg">
-                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    <hr>
+                    <div class="bbottom">
+                        <img src="./image/myPage/food16.jpg">
+                        <div class="content">
+                            <p>붓카게우동, 나베야끼우동</p><br>
+                            <p>충청북도 청주시 청원구 <br>율량로190번길 41</p>
+                        </div>
                     </div>
-                    <div id="restaurant">가게이름</div>
                 </div>
-                <hr>
-                <div class="bbottom">
-                    <img src="./image/myPage/picture.png">
-                    <div class="content">
-                        <p>찜한 가게의 대표 메뉴</p><br>
-                        <p>찜한 가게의 주소</p>
+                <div class="bookMark">
+                    <div class="top">
+                        <div class="star-ratings-fill space-x-2 text-lg" :style="{width: ratingToPercent + '%' }">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div class="star-ratings-base space-x-2 text-lg">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div id="restaurant">장군집</div>
+                    </div>
+                    <hr>
+                    <div class="bbottom">
+                        <img src="./image/myPage/food17.jpg">
+                        <div class="content">
+                            <p>돼지 볼살, 막창</p><br>
+                            <p>충청북도 청주시 서원구 <br>성봉로220번길 156</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bookMark">
+                    <div class="top">
+                        <div class="star-ratings-fill space-x-2 text-lg" :style="{width: ratingToPercent + '%' }">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div class="star-ratings-base space-x-2 text-lg">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div id="restaurant">삼동소바</div>
+                    </div>
+                    <hr>
+                    <div class="bbottom">
+                        <img src="./image/myPage/food18.jpeg">
+                        <div class="content">
+                            <p>소바, 돈까스</p><br>
+                            <p>충청북도 청주시 서원구 <br>남이면 가마리 30-9번지</p>
+                        </div>
                     </div>
                 </div>
             </div>
+            <img id="pause" src="./image/myPage/pause.png" onClick="stopBookMark()">
+            <img id="play" src="./image/myPage/play.png" onClick="showBookMarkSlides()">
         </div>
     </div>
-
     <footer>
         <div class="top">
             <img src="./image/footer/logo.png">
-            <h1>청주 맛집 스캔들</h1>
-            <p>청주 맛집의 모든 것</p>
+            <span class="title1">청주 맛집 스캔들</span>
+            <span class="title2">청주 맛집의 모든 것</span>
         </div>
         <div class="medium">
-            <p>개발진: 안유빈, 이은서, 정선종, 이명국</p>
-            <p>소재지: 충청북도 청주시 서원구 충대로1 충북대학교 전자정보대학3관</p>
-            <p>이메일 문의: gnow@chungbuk.ac.kr</p>
-            <div class="right">
-                <h2><a href="#">사이트 소개</a></h2>
-                <h2>|</h2>
-                <h2><a href="#">이용 안내</a></h2>
-                <h2>|</h2>
-                <h2><a href="#">공지사항</a></h2>
-                <h2>|</h2>
-            </div>
+            <span>개발진: 안유빈, 이은서, 정선종, 이명국</span>
+            <span>소재지: 충청북도 청주시 서원구 충대로1 충북대학교 전자정보대학3관</span>
+            <span>이메일 문의: gnow@chungbuk.ac.kr</span>
+
+            <!-- <div class="right">
+                                    <h2><a href="#">사이트 소개</a></h2>
+                                    <h2>|</h2>
+                                    <h2><a href="#">이용 안내</a></h2>
+                                    <h2>|</h2>
+                                    <h2><a href="#">공지사항</a></h2>
+                                    <h2>|</h2>
+                                </div> -->
         </div>
         <div class="bottom">
-            <p>©청주 맛집 스캔들 All rights reserved.</p>
+            <span>©청주 맛집 스캔들 All rights reserved.</span>
         </div>
     </footer>
 </body>

@@ -4,26 +4,23 @@
 }
 
 .myInformation {
-    padding-top: 300px;
+    padding-top: 200px;
     width: 100%;
-    height: 70%;
+    height: 80%;
     display: flex;
     position: absolute;
-    zoom: 70%;
 }
 
 .myInformation img {
     padding-left: 300px;
     width: 100px;
     height: 100px;
-    z-index: -1;
 }
 
 .myInformation h4 {
     left: 20px;
     font-size: 30px;
     transform: translate(0, -30px);
-    z-index: -1;
 }
 
 .myInformation #button1,
@@ -36,7 +33,6 @@
     border-radius: 30px;
     font-size: 20px;
     float: right;
-    z-index: -1;
 }
 
 .myInformation #button1 {
@@ -54,40 +50,70 @@ hr {
     border-bottom: solid black 1px;
 }
 
-h2 {
+#reviewH2 {
     transform: translate(0, 30px);
     text-align: center;
     font-size: 30px;
 }
 
-/**추가한 코드_ header에 안가려지는거 수정*/
-.myReviewList_title {
-    position: relative;
-    z-index: -1;
-}
-
 .myReviewList {
     display: flex;
-    zoom: 70%;
+    width: 100%;
+    height: 400px;
 }
 
-.myReviewList .myReview1,
-.myReviewList .myReview2,
-.myReviewList .myReview3,
-.myBookMark .myBookMark1,
-.myBookMark .myBookMark2,
-.myBookMark .myBookMark3 {
+.myReviewList #leftArrow {
+    transform: translate(100px, 170px);
+    text-align: center;
+    width: 30px;
+    height: 30px;
+}
+
+.myReviewList #rightArrow {
+    transform: translate(1700px, 170px);
+    text-align: center;
+    width: 30px;
+    height: 30px;
+}
+
+.myReviewList .myReview .review {
     border: solid black 1px;
-    transform: translate(200px, 30px);
+    transform: translate(120px, 30px);
     width: 500px;
     height: 300px;
+    float: left;
     color: #aaa9a9;
     position: relative;
     unicode-bidi: bidi-override;
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: #2b2a29;
-    z-index: -1;
+}
+
+.myBookMarkList .myBookMark .bookMark {
+    border: solid black 1px;
+    transform: translate(120px, 100px);
+    width: 500px;
+    height: 300px;
+    float: left;
+    color: #aaa9a9;
+    position: relative;
+    unicode-bidi: bidi-override;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #2b2a29;
+}
+
+.myReview,
+.myBookMark {
+    display: none;
+}
+
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
 }
 
 .top {
@@ -99,6 +125,7 @@ h2 {
     left: 60px;
     transform: scale(1.5);
     position: absolute;
+    z-index: 0;
     display: flex;
     overflow: hidden;
     -webkit-text-fill-color: darkgray;
@@ -108,15 +135,16 @@ h2 {
     top: 30px;
     left: 60px;
     position: absolute;
+    z-index: -1;
     transform: scale(1.5);
 }
 
-.top #restaurant {
-    transform: translate(80px, -18px);
+.myReviewList .top #restaurant {
+    transform: translate(300px, 25px);
 }
 
-.top #nickname {
-    transform: translate(120px, -18px);
+.myReviewList .top #nickname {
+    transform: translate(320px, 25px);
 }
 
 .myReviewList hr {
@@ -161,17 +189,48 @@ h2 {
     transform: translate(280px, -50px);
 }
 
-/**추가한 코드_ header에 안가려지는거 수정*/
-.myBookMark_title {
-    position: relative;
-    z-index: -1;
+.myReviewList #pause {
+    transform: translate(-690px, 350px);
+    text-align: center;
+    width: 50px;
+    height: 50px;
 }
 
-.myBookMark {
+.myReviewList #play {
+    transform: translate(-670px, 353px);
+    text-align: center;
+    width: 42px;
+    height: 42px;
+}
+
+#bookMarkH2 {
+    transform: translate(0, 100px);
+    text-align: center;
+    font-size: 30px;
+}
+
+.myBookMarkList {
     top: 80px;
     left: 50px;
     display: flex;
-    zoom: 70%;
+}
+
+.myBookMarkList #leftArrow {
+    transform: translate(100px, 230px);
+    text-align: center;
+    width: 30px;
+    height: 30px;
+}
+
+.myBookMarkList #rightArrow {
+    transform: translate(1700px, 230px);
+    text-align: center;
+    width: 30px;
+    height: 30px;
+}
+
+.myBookMark .top #restaurant {
+    transform: translate(320px, 25px);
 }
 
 .myBookMark img {
@@ -186,5 +245,20 @@ h2 {
 }
 
 .myBookMark .bbottom p {
-    transform: translate(230px, -180px);
+    transform: translate(250px, -180px);
+    font-size: 15px;
+}
+
+.myBookMarkList #pause {
+    transform: translate(-690px, 420px);
+    text-align: center;
+    width: 50px;
+    height: 50px;
+}
+
+.myBookMarkList #play {
+    transform: translate(-670px, 423px);
+    text-align: center;
+    width: 42px;
+    height: 42px;
 }
