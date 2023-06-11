@@ -9,15 +9,13 @@
   <script src="key.js"></script>
   <script src="https://www.w3schools.com/lib/w3.js"></script>
   <!--bootstrap-->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="style/main.css">
+  <link rel="stylesheet" type="text/css" href="style/review.css">
 
-    <!--jQuery-->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+  <!--jQuery-->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"
     integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 
-    <!-- 다른 html을 포함할때 사용-->
+  <!-- 다른 html을 포함할때 사용-->
   <script type="text/javascript">
     $(document).ready(function () {
 
@@ -53,43 +51,51 @@
 
   </script>
   <!--firebase용 코드 끝-->
-
+  <div class="review_title">맛집 리뷰 작성</div>
   <!--업로드-->
   <div class="container_review">
-    <a class="review_title">맛집 리뷰 작성</a>
-    <input type="text" class="form-control mt-2" id="store_name" placeholder="가게이름">
-    <input type="text" class="form-control mt-2" id="location" placeholder="가게 위치">
-    <input type="text" class="form-control mt-2" id="food_menu" placeholder="먹은 메뉴">
-    <textarea class="form-control mt-2" id="review" placeholder="리뷰"></textarea>
-    <input type="text" class="form-control mt-2" id="price" placeholder="가격">
-    <input class="form-control mt-2" type="file" id="image">
+    <div class="review_form">
+      <input type="text" id="store_name" placeholder="가게명"><br>
+      <select name="location" id="location">
+        <option value="">지역선택</option>
+        <option value="상당구">상당구</option>
+        <option value="청원구">청원구</option>
+        <option value="흥덕구">흥덕구</option>
+        <option value="서원구">서원구</option>
+      </select><br>
+      <input type="text" id="address" placeholder="주소">
+      <input type="text" id="food" placeholder="음식명">
+      <input type="text" id="price" placeholder="가격">
+      <textarea id="review" placeholder="리뷰"></textarea>
+      <input type="file" id="food_img">
+    </div>
   </div>
 
-  <button class="btn btn-danger mt-3 upload_btn" id="send">올리기</button>
+  <button class="upload_btn" id="send">올리기</button>
 
   <!--업로드 기능 구현-->
   <script>
     const db = firebase.firestore();
     const storage = firebase.storage();
 
-      /** localStorage에서 유저 정보 얻어옴 */
-      var userinfo = localStorage.getItem('user')
-      if (userinfo) {
-        /**user JSON의 따옴표 제거*/
-        userinfo = JSON.parse(userinfo);
+    /** localStorage에서 유저 정보 얻어옴 */
+    var userinfo = localStorage.getItem('user')
+    if (userinfo) {
+      /**user JSON의 따옴표 제거*/
+      userinfo = JSON.parse(userinfo);
 
-        /**로그인한 유저 이름을 헤더의 로그인 위치에 출력*/
-        if(userinfo.displayName != null){
-          $('#user_login').html(userinfo.displayName);
-        }
+      /**로그인한 유저 이름을 헤더의 로그인 위치에 출력*/
+      if (userinfo.displayName != null) {
+        $('#user_login').html(userinfo.displayName);
       }
+    }
 
     $('#send').click(function () {  // 올리기 버튼 누를 경우
 
       // 저장 경로 지정
-      var file = document.querySelector('#image').files[0];   // 파일 확인
+      var file = document.querySelector('#food_img').files[0];   // 파일 확인
       var storageRef = storage.ref();
-      var savepath = storageRef.child('image/' + file.name);
+      var savepath = storageRef.child('food_img/' + file.name);
       var upload_op = savepath.put(file)
 
       upload_op.on('state_changed',
@@ -106,11 +112,12 @@
 
             // 내용 입력
             var inputdata = {
-              가게이름: $('#store_name').val(),
-              가게위치: $('#location').val(),
+              가게명: $('#store_name').val(),
+              지역: $('#location').val(),
+              주소: $('#address').val(),
               음식명: $('#food').val(),
-              리뷰: $('#review').val(),
               가격: Number($('#price').val()),
+              리뷰: $('#review').val(),
               날짜: new Date(),
               이미지: url,
               uid: JSON.parse(localStorage.getItem('user')).uid,

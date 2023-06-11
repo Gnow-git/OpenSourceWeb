@@ -8,20 +8,18 @@
   <title>Document</title>
   <script src="key.js"></script>
   <script src="https://www.w3schools.com/lib/w3.js"></script>
-  <!--bootstrap
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">-->
+
   <link rel="stylesheet" type="text/css" href="style\main.css">
   <!--jQuery-->
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"
     integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 
-    <!-- 다른 html을 포함할때 사용-->
+  <!-- 다른 html을 포함할때 사용-->
   <script type="text/javascript">
     $(document).ready(function () {
 
       $("#headers").load("header.html");  // 원하는 파일 경로를 삽입하면 된다
-      $("#footers").load("footer.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
+      //$("#footers").load("footer.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
 
     });
   </script>
@@ -54,6 +52,49 @@
   </script>
   <!--firebase용 코드 끝-->
 
+  <!-- 게시글 레이아웃 -->
+  <div class="location_form1">
+    <div class="location_title1">상당구</div>
+    <img id="backBtn1" src="./image/index/back_arrow.png">
+    <div id="location1" class="palce_back"></div>
+    <img id="nextBtn1" src="./image/index/front_arrow.png">
+  </div>
+
+  <script>
+    // 버튼 클릭 시 스크롤 이동
+    document.getElementById("backBtn1").addEventListener("click", function () {
+      var container = document.getElementById("location1"); // 스크롤을 적용할 컨테이너 요소
+      container.scrollLeft -= 100; // 스크롤 이동할 값(가로로 100px 이동하도록 설정)
+    });
+
+    // 버튼 클릭 시 스크롤 이동
+    document.getElementById("nextBtn1").addEventListener("click", function () {
+      var container = document.getElementById("location1"); // 스크롤을 적용할 컨테이너 요소
+      container.scrollLeft += 100; // 스크롤 이동할 값(가로로 100px 이동하도록 설정)
+    });
+
+  </script>
+
+  <div class="location_form_2">
+    <div class="location_title2">청원구</div>
+    <img id="backBtn2" src="./image/index/back_arrow.png">
+    <div id="location2" class="palce_back"></div>
+    <img id="nextBtn2" src="./image/index/front_arrow.png">
+  </div>
+
+  <div class="location_form_3">
+    <img id="backBtn3" src="./image/index/back_arrow.png">
+    <div id="location3" class="palce_back"></div>
+    <img id="nextBtn3" src="./image/index/front_arrow.png">
+  </div>
+
+  <div class="location_form_4">
+    <img id="backBtn4" src="./image/index/back_arrow.png">
+    <div id="location4" class="palce_back"></div>
+    <img id="nextBtn4" src="./image/index/front_arrow.png">
+  </div>
+
+
   <!--게시글 레이아웃-->
   <script>
     const db = firebase.firestore();
@@ -73,35 +114,46 @@
   </script>
 
   <!-- 메인 콘텐츠 부분 -->
-<div id="wrapper">
-  <div class="container_main mt-3">
-    <script>
-      db.collection('product').get().then((snapshot) => {
-        snapshot.forEach((doc) => {
-          const timestamp = doc.data().날짜;
-          const date = timestamp.toDate();
-          const formattedDate = `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`;
-          console.log(doc.data()) // 데이터만 출력
+  <div id="wrapper">
+    <div class="container_main mt-3">
+      <script>
+        db.collection('product').orderBy("날짜", "desc").get().then((snapshot) => {
+          snapshot.forEach((doc) => {
+            const timestamp = doc.data().날짜;
+            const date = timestamp.toDate();
+            const formattedDate = `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`;
+            console.log(doc.data()) // 데이터만 출력
 
-          var layout = `<div class="product">
+            var layout = `<div class="product">
           <div class="thumbnail" style="background-image: url(${doc.data().이미지})"></div>
           <div class="product_contents">
+            <h5 class="title"><a href="detail.html?id=${doc.id}">${doc.data().가게명}</a></h5>
             <h5 class="title"><a href="detail.html?id=${doc.id}">${doc.data().음식명}</a></h5>
             <p class="date">${formattedDate}</p>
             <p class="price">${doc.data().가격}원</p>
           </div>
         </div>`;
 
-          $('.container_main').append(layout)
+            //$('.container_main').append(layout)
+
+            if (doc.data().지역 === '상당구') {
+              $('#location1').append(layout);
+            } else if (doc.data().지역 === '청원구') {
+              $('#location2').append(layout);
+            } else if (doc.data().지역 === '흥덕구') {
+              $('#location3').append(layout);
+            } else if (doc.data().지역 === '서원구') {
+              $('#location4').append(layout);
+            }
+          })
         })
-      })
-    </script>
+      </script>
+    </div>
+    <!-- 메인 콘텐츠 부분 끝 -->
   </div>
-  <!-- 메인 콘텐츠 부분 끝 -->
-</div>
   <div><button class="pick_btn review_btn_outline"><a href="pick.html"> 오늘 뭐먹어야할지 모르겠다면? </a></div>
   <div><button class="review_btn review_btn_outline"><a href="review.html"> 리뷰 작성하기 </a></div>
-  
+
   <div id="footers"></div>
 </body>
 

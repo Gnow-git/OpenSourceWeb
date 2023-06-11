@@ -97,7 +97,7 @@
 
     var querystring = new URLSearchParams(window.location.search) // 쿼리스트링 문자열 -> 오브젝트로 변환
 
-    db.collection('product').doc(querystring.get('id')).get().then((result) => {
+    db.collection('food_info').doc(querystring.get('id')).get().then((result) => {
 
       uploaduid = result.data().uid;
       title = result.data().식당명;

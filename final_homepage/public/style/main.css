@@ -1,43 +1,192 @@
 /** index */
 #wrapper{
+  position: static;
   height : 100%;
 }
 
-.food_list {
-  box-sizing: border-box;
-
+.location_title1{
   position: absolute;
-  width: 1214px;
-  height: 166px;
-  left: calc(50% - 1214px/2 - 7px);
-  top: 284px;
-
-  background: rgba(255, 255, 255, 0.2);
-  border: 2px solid #82A47D;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-size: 20px;
+  font-weight: bold;
+  left: 150px;
+  top: 10px;
 }
+
+
+.location_form1{
+  position: absolute;
+  display:flex;
+  top:200px;
+  height: fit-content;
+  left: 80px;
+  width: 1500px;
+  z-index: -1;
+}
+
+#location1{
+  margin-top: 50px;
+  margin-left: 80px;
+  width: 1200px;
+  height: fit-content;
+  z-index: -1;
+  display:flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+#location1::-webkit-scrollbar{
+  display:none
+}
+
+#backBtn1{
+  width: 60px;
+  height: 60px;
+  background: none;
+  margin-top: 120px;
+  margin-left: 50px;
+}
+
+#nextBtn1{
+  width: 60px;
+  height: 60px;
+  background: none;
+  margin-top: 120px;
+  margin-left: 100px;
+}
+
+.location_title2{
+  position: absolute;
+  font-size: 20px;
+  font-weight: bold;
+  left: 150px;
+  top: 10px;
+}
+
+.location_form_2{
+  position: absolute;
+  display:flex;
+  top:550px;
+  height: 300px;
+  width: 1500px;
+  left: 80px;
+  z-index: -1;
+}
+
+#location2{
+  margin-top: 50px;
+  margin-left: 80px;
+  width: 1200px;
+  height: 250px;
+}
+
+#backBtn2{
+  width: 60px;
+  height: 60px;
+  background: none;
+  margin-top: 120px;
+  margin-left: 50px;
+}
+
+#nextBtn2{
+  width: 60px;
+  height: 60px;
+  background: none;
+  margin-top: 120px;
+  margin-left: 100px;
+}
+
+
+.location_form_3{
+  position: absolute;
+  display:flex;
+  top:900px;
+  height: 300px;
+  width: 1500px;
+  left: 80px;
+  z-index: -1;
+}
+
+#location3{
+  margin-top: 25px;
+  margin-left: 80px;
+  width: 1200px;
+  height: 250px;
+}
+
+#backBtn3{
+  width: 60px;
+  height: 60px;
+  background: none;
+  margin-top: 120px;
+  margin-left: 50px;
+}
+
+#nextBtn3{
+  width: 60px;
+  height: 60px;
+  background: none;
+  margin-top: 120px;
+  margin-left: 100px;
+}
+
+.location_form_4{
+  position: absolute;
+  display:flex;
+  top:1300px;
+  height: 300px;
+  width: 1500px;
+  left: 80px;
+  z-index: -1;
+}
+
+#location4{
+  margin-top: 25px;
+  margin-left: 80px;
+  width: 1200px;
+  height: 250px;
+}
+
+#backBtn4{
+  width: 60px;
+  height: 60px;
+  background: none;
+  margin-top: 120px;
+  margin-left: 50px;
+}
+
+#nextBtn4{
+  width: 60px;
+  height: 60px;
+  background: none;
+  margin-top: 120px;
+  margin-left: 100px;
+}
+
 
 /** index에 표시될 항목 css */
 .product {
   display: flex;
   float: left;
-  top: 200px;
   width: 400px;
   position: relative;
   padding: 10px;
-  z-index: 50;  /** 헤더에 가려져서 보이도록 음수로 지정 */
+  z-index: -1;  /** 헤더에 가려져서 보이도록 음수로 지정 */
 }
 
 .thumbnail {
   max-width: 200px;
-  width: 50%;
+  min-width: 200px;
+  width: 200px;
   border-radius: 10px;
+  height: 200px;
+  max-height: 200px;
   background-size: cover;
   background-position: center;
 }
 
 .product_contents {
   padding-left: 20px;
+  min-width: 100px;
 }
 
 .product .price {
@@ -46,7 +195,7 @@
 }
 
 .product .title {
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 600;
 }
 
@@ -59,7 +208,7 @@
 
 /**음식 추천 버튼 css*/
 .pick_btn{
-  top: 70%;
+  top: 85%;
   left: 80%;
   position: fixed;
   border: 3px solid #519d9e;
@@ -75,8 +224,8 @@
 /**리뷰 작성하기 버튼 css*/
 
 .review_btn {
-  top: 80%;
-  left: 80%;
+  top: 92%;
+  left: 84%;
   position: fixed;
   border: 3px solid #519d9e;
   color: black;
@@ -130,86 +279,6 @@
 
 .mine {
   float: right;
-}
-
-/**리뷰*/
-
-.review_form{
-  position:absolute;
-  background-color: #322F2F;
-}
-
-.container_review {
-  box-sizing: border-box;
-  position: absolute;
-  width: 720px;
-  height: auto;
-  left: 500px;
-  top: 250px;
-
-  border: 3px solid #E5EEE4;
-}
-
-.review_title{
-font-family: 'Inter';
-font-weight: 400;
-font-size: 30px;
-font-style:unset;
-text-align: center;
-text-decoration: none;
-color: #3F443F;
-}
-.container_review #review {
-  height: 250px;
-}
-
-.container_review>text {
-  width: 50px;
-}
-
-.upload_btn{
-  position: absolute;
-  width: auto;
-  height: auto;
-  left: 1130px;
-  top: 800px;
-  
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 24px;
-  text-align: center;
-  
-  color: rgba(255, 255, 255, 0.84);
-}
-
-
-/**회원 가입*/
-.sign_up {
-  position: absolute;
-  top: 300px;
-  left: 500px;
-  width: 500px;
-}
-
-.sign_up>input {
-  padding-top: 100px;
-  background-color: rgb(82, 82, 48);
-}
-
-.sign_up_btn {
-  margin-top: 10px;
-  background-color: #322F2F;
-  color: #FFFFFF;
-}
-
-/**로그인*/
-.login {
-  position: absolute;
-  top: 500px;
-  left: 500px;
-  width: 500px;
 }
 
 /** 음식 추천 화면 css food_pick*/

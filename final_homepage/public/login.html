@@ -9,10 +9,7 @@
   <script src="key.js"></script>
   <script src="https://www.w3schools.com/lib/w3.js"></script>
   <!--헤더 추가할 때 사용-->
-  <!--bootstrap-->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="style/main.css">
+  <link rel="stylesheet" type="text/css" href="style/login.css">
 </head>
 
 <body>
@@ -47,39 +44,26 @@
   </script>
   <!--firebase용 코드 끝-->
 
-  <!--bootstrap-->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-    crossorigin="anonymous"></script>
 
   <!--jQuery-->
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"
     integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 
-  <div class="sign_up">
-    <div class="sign_up_name">
-      <input type="text" class="form-control" placeholder="name" id="name-new">
-    </div>
-    <div class="sign_up_email">
-      <input type="email" class="form-control" placeholder="email" id="email-new">
-    </div>
-    <div class="sign_up_pw">
-      <input type="password" class="form-control" placeholder="pw" id="pw-new">
-    </div>
-    <button type="submit" class="sign_up_btn" id="register">가입하기</button>
+  <div class="login_form">
+    <img id="login_img" src="./image/logo/logo_header.png">
+    <div id="login_title">로그인</div>
+    <hr>
+    <div id="login_sub">로그인을 통해 청주맛집의 연인이 되어 보세요</div>
+    <input type="email" class="login_email login_input" placeholder="이메일 입력" id="email">
+    <input type="password" class="login_pw login_input" placeholder="비밀번호 입력" id="pw">
+
+    <button type="submit" class="btn" id="login">로그인</button>
+    <div>or</div>
+    <button type="submit" class="btn" id="signup" onclick="location.href='signup.html'">회원가입</button>
+
+    <!--<button type="submit" class="btn" id="logout">로그아웃</button>-->
   </div>
 
-  <div class="login">
-    <div class="login_email">
-      <input type="email" class="form-control" placeholder="email" id="email">
-    </div>
-    <div class="login_pw">
-      <input type="password" class="form-control" placeholder="pw" id="pw">
-    </div>
-    <button type="submit" class="btn btn-primary" id="login">로그인하기</button>
-    <button type="submit" class="btn btn-primary" id="logout">로그아웃</button>
-
-  </div>
   <script>
     /**파이어베이스 db 접근할 때 사용*/
     const db = firebase.firestore();
@@ -92,7 +76,7 @@
       userinfo = JSON.parse(userinfo);
 
       /**로그인한 유저 이름을 헤더의 로그인 위치에 출력*/
-      if(userinfo.displayName != null){
+      if (userinfo.displayName != null) {
         $('#user_login').html(userinfo.displayName);
       }
     }
@@ -135,34 +119,7 @@
       })
 
     })
-    $('#register').click(function () {    // 가입하기 버튼 누를 경우
 
-      /** 사용자가 input에 입력한 값 불러오기 */
-      var email = $('#email-new').val();
-      var password = $('#pw-new').val();
-      var name = $('#name-new').val();
-
-      firebase.auth().createUserWithEmailAndPassword(email, password).then(
-       /**가입이 완료 되면*/ 
-      (result) => {
-
-        var userinfomation = {
-          ui_name: name,
-          ui_email: email
-        }
-        
-        /** 유저 정보 user라는 컬렉션으로 db에 저장 */
-        db.collection('user').doc(result.user.uid).set(userinfomation).then(() => {
-          console.log(result)
-            console.log(result.user);
-            result.user.updateProfile({ displayName: name })
-            alert("회원가입 되었습니다. ");
-            location.href = "login.html";
-        }).catch((err) => {
-          console.log(err)    // 실패할 경우 에러 확인
-        })
-      }).catch()
-    })
   </script>
 
 </body>
