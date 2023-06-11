@@ -10,46 +10,26 @@
     <link rel="stylesheet" type="text/css" href="./style/myPage.css">
     <link rel="stylesheet" type="text/css" href="./style/footer.css">
     <script type="text/javascript" src="./script/myPage.js"></script>
+
+    <!-- 다른 html을 포함할때 사용-->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#headers").load("header.html");  // 원하는 파일 경로를 삽입하면 된다
+            $("#footers").load("footer.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
+
+        });
+    </script>
 </head>
 
 <body style="overflow-x: hidden" onLoad="showReviewSlides(); showBookMarkSlides();">
     <div id="wrap">
-        <header>
-            <!-----로고 + 검색창 + 로그인 + 회원가입----->
-            <img class="header_img" src="./image/logo/logo_header.png">
-            <label class="search">
-                <input type="text" placeholder="검색어 입력">
-                <!--돋보기 이미지이니, src 건들지 말 것--뒤에 post나 get작성할 것-->
-                <a href="#">
-                    <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
-                </a>
-            </label>
-            <ul class="links">
-                <li>
-                    <a href="#" right="40px" top="30px">로그인</a>
-                </li>
-                <li>
-                    <a href="#">회원가입</a>
-                </li>
-            </ul>
-        </header>
-        <!-----내비게이션 바------>
-        <nav>
-            <ul class="place">
-                <li><a href="#">소개</a></li>
-                <li><a href="#">이용안내</a></li>
-                <li><a href="#">공지사항</a></li>
-                <li class="sub_place"><a href="#">맛집조회</a>
-                    <ul>
-                        <li><a href="#">상당구</a></li>
-                        <li><a href="#">청원구</a></li>
-                        <li><a href="#">흥덕구</a></li>
-                        <li><a href="#">서원구</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">마이페이지</a></li>
-            </ul>
-        </nav>
+        <div id="headers"></div>
+
         <div class="myInformation">
             <img src="./image/myPage/profile.png">
             <h4>닉네임</h4>

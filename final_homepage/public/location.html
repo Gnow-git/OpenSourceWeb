@@ -1,0 +1,118 @@
+    <!DOCTYPE html>
+    <html>
+
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="key.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="style\location.css">
+    <!--jQuery-->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+
+    <!-- 다른 html을 포함할때 사용-->
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+        $("#headers").load("header.html");  // 원하는 파일 경로를 삽입하면 된다
+        //$("#footers").load("footer.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
+
+        });
+    </script>
+    </head>
+
+    <body>
+
+    <div id="headers"></div>
+
+    <!-- firebase용 코드 시작 -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
+
+    <script>
+        var firebaseConfig = {
+        apiKey: firebase_Key,
+        authDomain: firebase_authDomain,
+        projectId: firebase_projectId,
+        storageBucket: firebase_storageBucket,
+        messagingSenderId: firebase_messagingSenderId,
+        appId: firebase_appId,
+        measurementId: firebase_measurementId
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+    </script>
+    <!--firebase용 코드 끝-->
+
+    <!-- 게시글 레이아웃 -->
+    <div class="location_form1">
+        <div id="location_title1">00구</div>
+        <div id="location1" class="palce_back"></div>
+    </div>
+
+
+    <!--게시글 레이아웃-->
+    <script>
+        const db = firebase.firestore();
+        const storage = firebase.storage();
+
+        /** localStorage에서 유저 정보 얻어옴 */
+        var userinfo = localStorage.getItem('user')
+        if (userinfo) {
+        /**user JSON의 따옴표 제거*/
+        userinfo = JSON.parse(userinfo);
+
+        /**로그인한 유저 이름을 헤더의 로그인 위치에 출력*/
+        if (userinfo.displayName != null) {
+            $('.user_login').html(userinfo.displayName);
+        }
+        }
+    </script>
+
+    <!-- 메인 콘텐츠 부분 -->
+    <div id="wrapper">
+        <div class="container_main mt-3">
+        <script>
+        // Firestore에서 선택된 지역인 데이터 가져오기
+        var urlParams = new URLSearchParams(window.location.search);
+        var selectedRegion = urlParams.get('id');
+  
+        var location_title1 = document.getElementById("location_title1");
+        location_title1.textContent = selectedRegion;
+
+        db.collection('product').where("지역", "==", selectedRegion).get().then((snapshot) => {
+          snapshot.forEach((doc) => {
+            const timestamp = doc.data().날짜;
+            const date = timestamp.toDate();
+            const formattedDate = `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`;
+            console.log(doc.data()) // 데이터만 출력
+  
+            var layout = `<div class="product">
+              <div class="thumbnail" style="background-image: url(${doc.data().이미지})"></div>
+              <div class="product_contents">
+                <h5 class="title"><a href="detail.html?id=${doc.id}">${doc.data().가게명}</a></h5>
+                <h5 class="title"><a href="detail.html?id=${doc.id}">${doc.data().음식명}</a></h5>
+                <p class="date">${formattedDate}</p>
+                <p class="price">${doc.data().가격}원</p>
+              </div>
+            </div>`;
+
+            $('#location1').append(layout);
+          })
+        })
+      </script>
+    </div>
+        <!-- 메인 콘텐츠 부분 끝 -->
+    </div>
+    <div id="footers"></div>
+    </body>
+
+    </html>

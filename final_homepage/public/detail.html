@@ -9,8 +9,6 @@
   <script src="key.js"></script>
   <link rel="stylesheet" type="text/css" href="style\detail.css">
 
-  <!-- 지도 설정 js -->
-  <script type="module" src="./index.js"></script>
   <!-- 다른 html을 포함할때 사용-->
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"
     integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
@@ -52,12 +50,15 @@
 
   </script>
   <!--firebase용 코드 끝-->
-<div class="detail_wrap">
+  <div class="detail_wrap">
     <div class="review_wrap">
-      <div id="food_img" style="background-image: url('image/detail/test_img.jpg')"></div>
+      <!--<div id="food_img" style="background-image: url('image/detail/test_img.jpg')"></div>-->
+      
+      <img id="food_img" src="" alt="음식 이미지">
+       
       <div class="review_info">
         <p class="food">음식명 : <span class="food_e">음식 이름</span> </p>
-        <p class="price">금액 : <span class="price_e">0000</span> 원</p>
+        <p class="price">금액 : <span class="price_e">0000</span></p>
         <p class="review">음식 리뷰 : <span class="review_e">음식 소개</span> </p>
         <p class="writer">작성자 : <span class="writer_e">홍길동</span> </p>
       </div>
@@ -82,8 +83,34 @@
       <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOYmFvTG5bVrwOJobogfc0onZjr2U3J6s&callback=initMap&v=weekly"
         defer></script>
+      <script>
+        // Initialize and add the map
+        function initMap() {
+          var geocoder = new google.maps.Geocoder();
+          var address = addressValue
+          geocoder.geocode({ 'address': address }, function (results, status) {
+            if (status === 'OK') {
+              const location = {
+                lat: results[0].geometry.location.lat(),
+                lng: results[0].geometry.location.lng()
+              };
+              const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 17,
+                center: location,
+              });
+
+              const marker = new google.maps.Marker({
+                position: location,
+                map: map,
+              });
+            } else {
+              console.log('Geocode error : ' + status);
+            }
+          });
+        }
+      </script>
     </div>
-</div>
+  </div>
   <script>
     const db = firebase.firestore();
     const storage = firebase.storage();
@@ -96,23 +123,32 @@
     }
 
     var querystring = new URLSearchParams(window.location.search) // 쿼리스트링 문자열 -> 오브젝트로 변환
+    var addressValue; // addressValue 변수를 함수 외부에 정의
 
-    db.collection('food_info').doc(querystring.get('id')).get().then((result) => {
+    db.collection('product').doc(querystring.get('id')).get().then((result) => {
 
       uploaduid = result.data().uid;
-      title = result.data().식당명;
+      title = result.data().가게명;
 
-      $('.author').html('올린사람 : ' + result.data().이름)
-      $('.title').html(result.data().식당명)
-      $('.price').html(result.data().가격 + '원')
-      $('.content').html(result.data().내용)
-      $('#food_img').css('background-image', `url(${result.data().이미지})`)
+      $('.food_e').html(result.data().음식명)
+      $('.price_e').html(result.data().가격 + '원')
+      $('.review_e').html(result.data().리뷰)
+      $('.writer_e').html(result.data().이름)
+      $('.restaurant_e').html(result.data().가게명)
+      $('.location_e').html(result.data().지역)
+      $('.address_e').html(result.data().주소)
+      $('#food_img').attr('src', result.data().이미지);
+
+      // 주소 값을 변수에 저장
+      addressValue = result.data().주소;
+
+      // geocoder.geocode() 함수를 호출하여 initMap() 함수 내에서 주소를 처리
+    initMap();
     })
 
     $('#edit').click(function () {
       window.location.href = 'edit.html?id=' + querystring.get('id')
     })
-
   </script>
 
 </body>

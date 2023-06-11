@@ -28,7 +28,7 @@ header {
   background-color: white;
 }
 
-header > .header_img{
+header > a > .header_img{
   width:130px;
   height:80px;
   margin-right: 50px;

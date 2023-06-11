@@ -1,0 +1,79 @@
+/** index */
+#wrapper{
+    position: static;
+    height : 100%;
+  }
+  
+  #location_title1{
+    position: absolute;
+    font-size: 20px;
+    font-weight: bold;
+    left: 150px;
+    top: 10px;
+  }
+  
+  
+  .location_form1{
+    position: absolute;
+    display:flex;
+    top:200px;
+    height: fit-content;
+    left: 80px;
+    width: 1500px;
+    z-index: -1;
+  }
+  
+  #location1{
+    margin-top: 50px;
+    margin-left: 80px;
+    width: 1500px;
+    height: fit-content;
+    z-index: -1;
+  }
+  
+  
+  /** index에 표시될 항목 css */
+  .product {
+    display: flex;
+    float: left;
+    width: 400px;
+    position: relative;
+    padding: 10px;
+    margin-top: 20px;
+    z-index: -1;  /** 헤더에 가려져서 보이도록 음수로 지정 */
+  }
+  
+  .thumbnail {
+    max-width: 200px;
+    min-width: 200px;
+    width: 200px;
+    border-radius: 10px;
+    height: 200px;
+    max-height: 200px;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .product_contents {
+    padding-left: 20px;
+    min-width: 100px;
+  }
+  
+  .product .price {
+    font-size: 16px;
+    font-weight: 600;
+  }
+  
+  .product .title {
+    font-size: 15px;
+    font-weight: 600;
+  }
+  
+  .product .date {
+    color: grey;
+    font-size: 13px;
+  }
+
+
+  /** location css 끝 */
+  

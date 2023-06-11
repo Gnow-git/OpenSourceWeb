@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,17 +13,32 @@
   <div id="wrap">
     <header>
       <!-----로고 + 검색창 + 로그인 + 회원가입----->
-      <img class="header_img" src="./image/logo/logo_header.png">
+      <a href="index.html">
+        <img class="header_img" src="./image/logo/logo_header.png">
+      </a>
       <label class="search">
-        <input type="text" placeholder="검색어 입력">
+        <input class="search_text" type="text" placeholder="검색어 입력">
         <!--돋보기 이미지이니, src 건들지 말 것--뒤에 post나 get작성할 것-->
         <a href="#">
-          <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+          <img class="search_btn" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
         </a>
       </label>
+
+      <script>
+        document.querySelector('.search_btn').addEventListener('click', function(e) {
+          e.preventDefault(); // 기본 동작인 링크 이동을 방지
+      
+          var searchValue = document.querySelector('.search_text').value; // 검색어 값 가져오기
+          localStorage.setItem('search_title', searchValue); // 검색어를 로컬 스토리지에 저장
+      
+          // 검색 결과 페이지로 이동
+          window.location.href = 'search.html';
+        });
+      </script>
+
       <ul class="links">
         <li>
-          <a href="login.html" right="40px" top="30px">로그인</a>
+          <a class="user_login" href="login.html" right="40px" top="30px">로그인</a>
         </li>
         <li>
           <a href="signup.html">회원가입</a>
@@ -37,15 +53,16 @@
         <li><a href="notice.html">공지사항</a></li>
         <li class="sub_place"><a href="#">맛집조회</a>
           <ul>
-            <li><a href="#">상당구</a></li>
-            <li><a href="#">청원구</a></li>
-            <li><a href="#">흥덕구</a></li>
-            <li><a href="#">서원구</a></li>
+            <li><a href="location.html?id=상당구">상당구</a></li>
+            <li><a href="location.html?id=청원구">청원구</a></li>
+            <li><a href="location.html?id=흥덕구">흥덕구</a></li>
+            <li><a href="location.html?id=서원구">서원구</a></li>
           </ul>
         </li>
-        <li><a href="#">마이페이지</a></li>
+        <li><a href="myPage.html">마이페이지</a></li>
       </ul>
     </nav>
   </div>
 </body>
+
 </html>

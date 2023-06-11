@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<script src="key.js"></script>
+<script src="https://www.w3schools.com/lib/w3.js"></script>
+
+<link rel="stylesheet" type="text/css" href="style\search.css">
+<!--jQuery-->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+    integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+
+<!-- 다른 html을 포함할때 사용-->
+<script type="text/javascript">
+    $(document).ready(function () {
+
+    $("#headers").load("header.html");  // 원하는 파일 경로를 삽입하면 된다
+    //$("#footers").load("footer.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
+
+    });
+</script>
+</head>
+
+<body>
+
+<div id="headers"></div>
+
+<!-- firebase용 코드 시작 -->
+<script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
+
+<script>
+    var firebaseConfig = {
+    apiKey: firebase_Key,
+    authDomain: firebase_authDomain,
+    projectId: firebase_projectId,
+    storageBucket: firebase_storageBucket,
+    messagingSenderId: firebase_messagingSenderId,
+    appId: firebase_appId,
+    measurementId: firebase_measurementId
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+</script>
+<!--firebase용 코드 끝-->
+
+<script>
+    var db = firebase.firestore();
+</script>
+
+<!-- 게시글 레이아웃 -->
+<div class="location_form1">
+    <div class="location_title1">검색 된 정보</div>
+
+    <div id="location1" class="palce_back"></div>
+
+  </div>
+
+<!-- 메인 콘텐츠 부분 -->
+<div id="wrapper">
+    <div class="container_main mt-3">
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+              var searchTitle = localStorage.getItem('search_title');
+              console.log(searchTitle);
+              db.collection('product').get().then((snapshot) => {
+                snapshot.forEach((doc) => {
+                  const timestamp = doc.data().날짜;
+                  const date = timestamp.toDate();
+                  const formattedDate = `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`;
+                  console.log(doc.data());
+          
+                  // Check if the properties exist and include the searchTitle
+                  if (
+                    (doc.data().음식명 && doc.data().음식명.includes(searchTitle)) ||
+                    (doc.data().가게명 && doc.data().가게명.includes(searchTitle)) ||
+                    (doc.data().리뷰 && doc.data().리뷰.includes(searchTitle)) ||
+                    (doc.data().주소 && doc.data().주소.includes(searchTitle)) ||
+                    (doc.data().지역 && doc.data().지역.includes(searchTitle))
+                  ) {
+                    var layout = `<div class="product">
+                        <div class="thumbnail" style="background-image: url(${doc.data().이미지})"></div>
+                        <div class="product_contents">
+                          <h5 class="title"><a href="detail.html?id=${doc.id}">${doc.data().가게명}</a></h5>
+                          <h5 class="title"><a href="detail.html?id=${doc.id}">${doc.data().음식명}</a></h5>
+                          <p class="date">${formattedDate}</p>
+                          <p class="price">${doc.data().가격}원</p>
+                        </div>
+                      </div>`;
+          
+                    $('#location1').append(layout);
+                  }
+                })
+              })
+          
+              // 작업이 끝나면 로컬 스토리지에서 검색어 값을 삭제
+              localStorage.removeItem('search_title');
+            });
+          </script>
+</div>
+    <!-- 메인 콘텐츠 부분 끝 -->
+</div>
+<div id="footers"></div>
+</body>
+
+</html>

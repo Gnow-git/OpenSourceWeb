@@ -1,0 +1,78 @@
+/**리뷰*/
+
+.review_title {
+  position: absolute;
+  font-family: 'Inter';
+  font-weight: bold;
+  font-size: 30px;
+  font-style: unset;
+  text-align: center;
+  text-decoration: none;
+  color: #3F443F;
+  top: 230px;
+  left: 550px;
+  background-color: #FFFFFF;
+  z-index: 10;
+}
+
+.container_review {
+  box-sizing: border-box;
+  position: absolute;
+  width: 550px;
+  height: 600px;
+  left: 500px;
+  top: 250px;
+  border: 3px solid #E5EEE4;
+  z-index: -1;
+}
+
+.review_form {
+  margin-top: 20px;
+}
+
+.container_review input {
+  width: 500px;
+  height: 40px;
+  margin-top: 5px;
+  margin-left: 20px;
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  border: none;
+  border-bottom: 2px solid #D9D9D9;
+  outline: none;
+}
+
+#location {
+  margin-top: 5px;
+  margin-left: 20px
+}
+
+#review {
+  margin-top: 5px;
+  margin-left: 20px;
+  width: 500px;
+  height: 200px;
+  font-size: 15px;
+  font-weight: bold;
+  font-family: 'Inter';
+  border: none;
+  border-bottom: 2px solid #D9D9D9;
+  outline: none;
+}
+
+.upload_btn {
+  position: absolute;
+  width: auto;
+  height: auto;
+  left: 950px;
+  top: 810px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  background-color: #3F443F;
+}
