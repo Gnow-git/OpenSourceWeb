@@ -5,7 +5,7 @@
 }
 
 .myInformation {
-    padding-top: 200px;
+    top: 200px;
     width: 100%;
     height: 80%;
     display: flex;
@@ -45,16 +45,15 @@
 }
 
 hr {
-    padding-top: 330px;
+    padding-top: 300px;
     width: 100%;
     border: 0px;
     border-bottom: solid black 1px;
 }
 
 #reviewH2 {
-    transform: translate(0, 30px);
     text-align: center;
-    font-size: 30px;
+    font-size: 25px;
 }
 
 .myReviewList {
@@ -64,14 +63,14 @@ hr {
 }
 
 .myReviewList #leftArrow {
-    transform: translate(100px, 170px);
+    transform: translate(100px, 140px);
     text-align: center;
     width: 30px;
     height: 30px;
 }
 
 .myReviewList #rightArrow {
-    transform: translate(1700px, 170px);
+    transform: translate(1700px, 140px);
     text-align: center;
     width: 30px;
     height: 30px;
@@ -79,7 +78,7 @@ hr {
 
 .myReviewList .myReview .review {
     border: solid black 1px;
-    transform: translate(120px, 30px);
+    transform: translate(120px, 0px);
     width: 500px;
     height: 300px;
     float: left;
@@ -93,7 +92,7 @@ hr {
 
 .myBookMarkList .myBookMark .bookMark {
     border: solid black 1px;
-    transform: translate(120px, 100px);
+    transform: translate(120px, -60px);
     width: 500px;
     height: 300px;
     float: left;
@@ -143,7 +142,7 @@ hr {
 .myReviewList .top #restaurant {
     transform: translate(300px, 25px);
     margin-top: -50px;
-    margin-left:-100px;
+    margin-left: -100px;
 }
 
 .myReviewList .top #nickname {
@@ -194,23 +193,23 @@ hr {
 }
 
 .myReviewList #pause {
-    transform: translate(-690px, 350px);
+    transform: translate(-690px, 310px);
     text-align: center;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
 }
 
 .myReviewList #play {
-    transform: translate(-670px, 353px);
+    transform: translate(-670px, 313px);
     text-align: center;
-    width: 42px;
-    height: 42px;
+    width: 32px;
+    height: 32px;
 }
 
 #bookMarkH2 {
-    transform: translate(0, 100px);
+    transform: translate(0, -60px);
     text-align: center;
-    font-size: 30px;
+    font-size: 25px;
 }
 
 .myBookMarkList {
@@ -220,21 +219,21 @@ hr {
 }
 
 .myBookMarkList #leftArrow {
-    transform: translate(100px, 230px);
+    transform: translate(100px, 100px);
     text-align: center;
     width: 30px;
     height: 30px;
 }
 
 .myBookMarkList #rightArrow {
-    transform: translate(1700px, 230px);
+    transform: translate(1700px, 100px);
     text-align: center;
     width: 30px;
     height: 30px;
 }
 
 .myBookMark .top #restaurant {
-    transform: translate(320px, 25px);
+    transform: translate(200px, -15px);
 }
 
 .myBookMark img {
@@ -244,7 +243,7 @@ hr {
 }
 
 .myBookMark hr {
-    padding-top: 5px;
+    padding-top: 0px;
     width: 85%;
 }
 
@@ -254,15 +253,15 @@ hr {
 }
 
 .myBookMarkList #pause {
-    transform: translate(-690px, 420px);
+    transform: translate(-690px, 250px);
     text-align: center;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
 }
 
 .myBookMarkList #play {
-    transform: translate(-670px, 423px);
+    transform: translate(-670px, 253px);
     text-align: center;
-    width: 42px;
-    height: 42px;
+    width: 32px;
+    height: 32px;
 }

@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="key.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>myPage</title>
     <link rel="stylesheet" type="text/css" href="./style/header.css">
@@ -35,6 +36,28 @@
             <div id="button2"><a href="#">로그아웃</a></div>
         </div>
 
+        <!--firebase용 코드 시작-->
+        <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
+
+        <script>
+            var firebaseConfig = {
+                apiKey: firebase_Key,
+                authDomain: firebase_authDomain,
+                projectId: firebase_projectId,
+                storageBucket: firebase_storageBucket,
+                messagingSenderId: firebase_messagingSenderId,
+                appId: firebase_appId,
+                measurementId: firebase_measurementId
+            };
+
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+
+        </script>
+        <!--firebase용 코드 끝-->
         <script>
             // 유저 정보 확인
             var userinfo = localStorage.getItem('user')
@@ -430,31 +453,20 @@
             <img id="pause" src="./image/myPage/pause.png" onClick="stopBookMark()">
             <img id="play" src="./image/myPage/play.png" onClick="showBookMarkSlides()">
         </div>
+        <div id="footers"></div>
     </div>
-    <footer>
-        <div class="top">
-            <img src="./image/footer/logo.png">
-            <span class="title1">청주 맛집 스캔들</span>
-            <span class="title2">청주 맛집의 모든 것</span>
-        </div>
-        <div class="medium">
-            <span>개발진: 안유빈, 이은서, 정선종, 이명국</span>
-            <span>소재지: 충청북도 청주시 서원구 충대로1 충북대학교 전자정보대학3관</span>
-            <span>이메일 문의: gnow@chungbuk.ac.kr</span>
-
-            <!-- <div class="right">
-                                    <h2><a href="#">사이트 소개</a></h2>
-                                    <h2>|</h2>
-                                    <h2><a href="#">이용 안내</a></h2>
-                                    <h2>|</h2>
-                                    <h2><a href="#">공지사항</a></h2>
-                                    <h2>|</h2>
-                                </div> -->
-        </div>
-        <div class="bottom">
-            <span>©청주 맛집 스캔들 All rights reserved.</span>
-        </div>
-    </footer>
 </body>
+<script>
+
+    /**파이어베이스 db 접근할 때 사용*/
+    const db = firebase.firestore();
+    const storage = firebase.storage();
+    $('#button2').click(function () {  //로그 아웃 처리
+        firebase.auth().signOut()
+        localStorage.removeItem('user')
+        alert("로그아웃 되었습니다. ");
+        location.href = "login.html";
+    })
+</script>
 
 </html>
