@@ -63,8 +63,7 @@
         <p class="writer">작성자 : <span class="writer_e">홍길동</span> </p>
       </div>
       <div class="review_button">
-        <button class="reivew_modify">리뷰 수정</button>
-        <button class="chat">대화하기</button>
+        <button class="reivew_modify" id="modify" onclick="modifyReview()" >리뷰 수정</button>
       </div>
     </div>
 
@@ -75,9 +74,6 @@
         <p class="restaurant">가게명 : <span class="restaurant_e">000 가게</span> </p>
         <p class="location">지역 : <span class="location_e">충북 청주시 00구</span> </p>
         <p class="address">주소 : <span class="address_e">충북 청주시 00구 00로</span> </p>
-      </div>
-      <div class="review_button">
-        <button class="map">전체 지도 보기</button>
       </div>
       <!-- 나중에 api 키 숨겨야함 -->
       <script
@@ -146,8 +142,8 @@
     initMap();
     })
 
-    $('#edit').click(function () {
-      window.location.href = 'edit.html?id=' + querystring.get('id')
+    $('#modify').click(function () {
+      window.location.href = 'modify.html?id=' + querystring.get('id')
     })
   </script>
 
