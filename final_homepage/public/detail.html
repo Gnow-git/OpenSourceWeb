@@ -26,126 +26,129 @@
 </head>
 
 <body>
+  <div id="wrap">
+    <div id="headers"></div>
+    <!--firebase용 코드 시작-->
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
 
-  <div id="headers"></div>
-  <!--firebase용 코드 시작-->
-  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
+    <script>
+      var firebaseConfig = {
+        apiKey: firebase_Key,
+        authDomain: firebase_authDomain,
+        projectId: firebase_projectId,
+        storageBucket: firebase_storageBucket,
+        messagingSenderId: firebase_messagingSenderId,
+        appId: firebase_appId,
+        measurementId: firebase_measurementId
+      };
 
-  <script>
-    var firebaseConfig = {
-      apiKey: firebase_Key,
-      authDomain: firebase_authDomain,
-      projectId: firebase_projectId,
-      storageBucket: firebase_storageBucket,
-      messagingSenderId: firebase_messagingSenderId,
-      appId: firebase_appId,
-      measurementId: firebase_measurementId
-    };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
 
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
+    </script>
+    <!--firebase용 코드 끝-->
+    <div class="detail_wrap">
+      <div class="review_wrap">
+        <!--<div id="food_img" style="background-image: url('image/detail/test_img.jpg')"></div>-->
 
-  </script>
-  <!--firebase용 코드 끝-->
-  <div class="detail_wrap">
-    <div class="review_wrap">
-      <!--<div id="food_img" style="background-image: url('image/detail/test_img.jpg')"></div>-->
-      
-      <img id="food_img" src="" alt="음식 이미지">
-       
-      <div class="review_info">
-        <p class="food">음식명 : <span class="food_e">음식 이름</span> </p>
-        <p class="price">금액 : <span class="price_e">0000</span></p>
-        <p class="review">음식 리뷰 : <span class="review_e">음식 소개</span> </p>
-        <p class="writer">작성자 : <span class="writer_e">홍길동</span> </p>
+        <img id="food_img" src="" alt="음식 이미지">
+
+        <div class="review_info">
+          <p class="food">음식명 : <span class="food_e">음식 이름</span> </p>
+          <p class="price">금액 : <span class="price_e">0000</span></p>
+          <p class="review">음식 리뷰 : <span class="review_e">음식 소개</span> </p>
+          <p class="writer">작성자 : <span class="writer_e">홍길동</span> </p>
+        </div>
+        <div class="review_button">
+          <button class="reivew_modify" id="modify" onclick="modifyReview()">리뷰 수정</button>
+        </div>
       </div>
-      <div class="review_button">
-        <button class="reivew_modify" id="modify" onclick="modifyReview()" >리뷰 수정</button>
-      </div>
-    </div>
 
-    <div class="review_map_wrap">
-      <!-- 맵 -->
-      <div id="map"></div>
-      <div class="review_info">
-        <p class="restaurant">가게명 : <span class="restaurant_e">000 가게</span> </p>
-        <p class="location">지역 : <span class="location_e">충북 청주시 00구</span> </p>
-        <p class="address">주소 : <span class="address_e">충북 청주시 00구 00로</span> </p>
-      </div>
-      <!-- 나중에 api 키 숨겨야함 -->
-      <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOYmFvTG5bVrwOJobogfc0onZjr2U3J6s&callback=initMap&v=weekly"
-        defer></script>
-      <script>
-        // Initialize and add the map
-        function initMap() {
-          var geocoder = new google.maps.Geocoder();
-          var address = addressValue
-          geocoder.geocode({ 'address': address }, function (results, status) {
-            if (status === 'OK') {
-              const location = {
-                lat: results[0].geometry.location.lat(),
-                lng: results[0].geometry.location.lng()
-              };
-              const map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 17,
-                center: location,
-              });
+      <div class="review_map_wrap">
+        <!-- 맵 -->
+        <div id="map"></div>
+        <div class="review_info">
+          <p class="restaurant">가게명 : <span class="restaurant_e">000 가게</span> </p>
+          <p class="location">지역 : <span class="location_e">충북 청주시 00구</span> </p>
+          <p class="address">주소 : <span class="address_e">충북 청주시 00구 00로</span> </p>
+        </div>
+        <!-- 나중에 api 키 숨겨야함 -->
+        <script
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOYmFvTG5bVrwOJobogfc0onZjr2U3J6s&callback=initMap&v=weekly"
+          defer></script>
+        <script>
+          // Initialize and add the map
+          function initMap() {
+            var geocoder = new google.maps.Geocoder();
+            var address = addressValue
+            geocoder.geocode({ 'address': address }, function (results, status) {
+              if (status === 'OK') {
+                const location = {
+                  lat: results[0].geometry.location.lat(),
+                  lng: results[0].geometry.location.lng()
+                };
+                const map = new google.maps.Map(document.getElementById("map"), {
+                  zoom: 17,
+                  center: location,
+                });
 
-              const marker = new google.maps.Marker({
-                position: location,
-                map: map,
-              });
-            } else {
-              console.log('Geocode error : ' + status);
-            }
-          });
-        }
-      </script>
+                const marker = new google.maps.Marker({
+                  position: location,
+                  map: map,
+                });
+              } else {
+                console.log('Geocode error : ' + status);
+              }
+            });
+          }
+        </script>
+      </div>
     </div>
   </div>
-  <script>
-    const db = firebase.firestore();
-    const storage = firebase.storage();
+  <div id="footers"></div>
+  
+    <script>
+      const db = firebase.firestore();
+      const storage = firebase.storage();
 
-    // 유저 정보 확인
-    var userinfo = localStorage.getItem('user')
-    if (userinfo) {
-      userinfo = JSON.parse(userinfo);
-      $('#userName').html(userinfo.displayName);
-    }
+      // 유저 정보 확인
+      var userinfo = localStorage.getItem('user')
+      if (userinfo) {
+        userinfo = JSON.parse(userinfo);
+        $('#userName').html(userinfo.displayName);
+      }
 
-    var querystring = new URLSearchParams(window.location.search) // 쿼리스트링 문자열 -> 오브젝트로 변환
-    var addressValue; // addressValue 변수를 함수 외부에 정의
+      var querystring = new URLSearchParams(window.location.search) // 쿼리스트링 문자열 -> 오브젝트로 변환
+      var addressValue; // addressValue 변수를 함수 외부에 정의
 
-    db.collection('product').doc(querystring.get('id')).get().then((result) => {
+      db.collection('product').doc(querystring.get('id')).get().then((result) => {
 
-      uploaduid = result.data().uid;
-      title = result.data().가게명;
+        uploaduid = result.data().uid;
+        title = result.data().가게명;
 
-      $('.food_e').html(result.data().음식명)
-      $('.price_e').html(result.data().가격 + '원')
-      $('.review_e').html(result.data().리뷰)
-      $('.writer_e').html(result.data().이름)
-      $('.restaurant_e').html(result.data().가게명)
-      $('.location_e').html(result.data().지역)
-      $('.address_e').html(result.data().주소)
-      $('#food_img').attr('src', result.data().이미지);
+        $('.food_e').html(result.data().음식명)
+        $('.price_e').html(result.data().가격 + '원')
+        $('.review_e').html(result.data().리뷰)
+        $('.writer_e').html(result.data().이름)
+        $('.restaurant_e').html(result.data().가게명)
+        $('.location_e').html(result.data().지역)
+        $('.address_e').html(result.data().주소)
+        $('#food_img').attr('src', result.data().이미지);
 
-      // 주소 값을 변수에 저장
-      addressValue = result.data().주소;
+        // 주소 값을 변수에 저장
+        addressValue = result.data().주소;
 
-      // geocoder.geocode() 함수를 호출하여 initMap() 함수 내에서 주소를 처리
-    initMap();
-    })
+        // geocoder.geocode() 함수를 호출하여 initMap() 함수 내에서 주소를 처리
+        initMap();
+      })
 
-    $('#modify').click(function () {
-      window.location.href = 'modify.html?id=' + querystring.get('id')
-    })
-  </script>
+      $('#modify').click(function () {
+        window.location.href = 'modify.html?id=' + querystring.get('id')
+      })
+    </script>
 
 </body>
 
