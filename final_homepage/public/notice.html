@@ -91,7 +91,6 @@
                             <th class="h_title">제목</th>
                             <th class="h_writer">작성자</th>
                             <th class="h_date">날짜</th>
-                            <th class="h_count">조회수</th>
                         </tr>
                     </thead>
                     <tbody class="post_body"></tbody>
@@ -132,29 +131,12 @@
                 <td class="title"><a href="notice_detail.html?id=${post.id}" id="post_title">${post.제목}</a></td>
                 <td class="writer">${post.작성자}</td>
                 <td class="date">${formattedDate}</td>
-                <td class="count">${0}</td>
             </tr>`;
 
                     $('.post_body').append(layout);
                 });
             }
-
-            // 게시물 제목 클릭 시 조회수 증가
-            $('.post_body').on('click', '.title a', function () {
-                const postId = $(this).attr('href').split('=')[1]; // 게시물 ID 추출
-                const countElement = $(this).closest('.post_row').find('.count'); // 조회수 엘리먼트
-
-                db.collection('post').doc(postId).update({ 조회수: firebase.firestore.FieldValue.increment(1) })
-                    .then(() => {
-                        const newCount = parseInt(countElement.text()) + 1; // 현재 조회수 값 + 1
-                        countElement.text(newCount); // 증가한 조회수로 업데이트
-                    })
-                    .catch((error) => {
-                        console.error('Error updating document: ', error);
-                    });
-            });
             
-
             // 페이지네이션 생성 함수
             function generatePagination(totalPosts) {
                 const totalPages = Math.ceil(totalPosts / postsPerPage);
