@@ -8,7 +8,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    z-index: -1;
+    z-index: 10;
   }
 
   #login_img{
@@ -65,4 +65,16 @@
 
   #login{
     margin-top: 20px;
+  }
+
+  #wrap{
+    min-height: 100%;
+    position: relative;
+  
+  }
+  
+  footer{
+    bottom: 0px;
+    position: absolute;
+    height: 10rem;
   }
