@@ -9,7 +9,6 @@
     <script src="key.js"></script>
     <script src="https://www.w3schools.com/lib/w3.js"></script>
 
-
     <link rel="stylesheet" type="text/css" href="style\notice.css">
     <!--jQuery-->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"
@@ -77,7 +76,6 @@
     </script>
 
     <!-- 게시판 부분 -->
-
     <div class="board_wrap">
         <div>
             <h1>공지사항</h1>
@@ -94,48 +92,124 @@
                         <th class="h_count">조회수</th>
                     </tr>
                 </thead>
-                <tbody class="post_body">
-                    <script>
-                        /* 날짜 순으로 공지사항에 표시 */
-                        db.collection('post').orderBy('날짜','desc').get().then((snapshot) => {
-                            snapshot.forEach((doc) => {
-                                const timestamp = doc.data().날짜;
-                                const date = timestamp.toDate();
-                                const formattedDate = `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`;
-                                console.log(doc.data()) // 데이터만 출력
-
-                                var layout = `
-                                    <tr class="post_row">
-                                        <td class="num">${doc.data().번호}</td>
-                                        <td class="title"><a href="detail_notice.html?id=${doc.id}">${doc.data().제목}</td>
-                                        <td class="writer">${doc.data().작성자}</td>
-                                        <td class="date">${formattedDate}</td>
-                                        <td class="count">${0}</td>
-                                    </tr>`;
-
-                                $('.post_body').append(layout);
-                            });
-                        });
-                    </script>
-                </tbody>
+                <tbody class="post_body"></tbody>
             </table>
             <!--하단 번호-->
             <ul class="pagination">
-                <li><a href="#" class="prev">&laquo</a></li>
+                <li><a href="#" class="prev">&laquo;</a></li>
                 <li><a href="#" class="active">1</a></li>
-                <li> <a href="#">2</a></li>
-                <li> <a href="#">3</a></li>
-                <li> <a href="#">4</a></li>
-                <li> <a href="#">5</a></li>
-                <li> <a href="#">6</a></li>
-                <li> <a href="#">7</a></li>
-                <li> <a href="#">8</a></li>
-                <li> <a href="#">9</a></li>
+                <!-- 추가 -->
+                <li><a href="#" class="page">2</a></li>
+                <li><a href="#" class="page">3</a></li>
+                <li><a href="#" class="page">4</a></li>
+                <li><a href="#" class="page">5</a></li>
+                <li><a href="#" class="page">6</a></li>
+                <li><a href="#" class="page">7</a></li>
                 <li><a href="#" class="next">&raquo;</a></li>
             </ul><br>
         </div>
 
     </div>
+
+    <script>
+        var currentPage = 1; // 현재 페이지 번호
+        var postsPerPage = 10; // 페이지당 게시물 수
+
+        // 게시물 렌더링 함수
+        function renderPosts(posts) {
+            $('.post_body').empty(); // 게시물 목록 초기화
+
+            posts.forEach((post) => {
+                const timestamp = post.날짜;
+                const date = timestamp.toDate();
+                const formattedDate = `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`;
+
+                var layout = `
+                    <tr class="post_row">
+                        <td class="num">${post.번호}</td>
+                        <td class="title"><a href="detail_notice.html?id=${post.id}">${post.제목}</td>
+                        <td class="writer">${post.작성자}</td>
+                        <td class="date">${formattedDate}</td>
+                        <td class="count">${0}</td>
+                    </tr>`;
+
+                $('.post_body').append(layout);
+            });
+        }
+
+        // 페이지네이션 생성 함수
+        function generatePagination(totalPosts) {
+            const totalPages = Math.ceil(totalPosts / postsPerPage);
+
+            $('.pagination').empty(); // 페이지네이션 초기화
+
+            // 이전 페이지 버튼
+            $('.pagination').append('<li><a href="#" class="prev">&laquo;</a></li>');
+
+            // 페이지 버튼
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === currentPage) {
+                    $('.pagination').append(`<li><a href="#" class="active page">${i}</a></li>`);
+                } else {
+                    $('.pagination').append(`<li><a href="#" class="page">${i}</a></li>`);
+                }
+            }
+
+            // 다음 페이지 버튼
+            $('.pagination').append('<li><a href="#" class="next">&raquo;</a></li>');
+        }
+
+        // 게시물 가져오기 함수
+        function getPosts() {
+            const start = (currentPage - 1) * postsPerPage;
+            const end = start + postsPerPage;
+
+            db.collection('post')
+                .orderBy('날짜', 'desc')
+                .get()
+                .then((snapshot) => {
+                    const totalPosts = snapshot.size;
+                    const posts = [];
+
+                    snapshot.forEach((doc) => {
+                        posts.push({
+                            id: doc.id,
+                            ...doc.data(),
+                        });
+                    });
+
+                    const displayedPosts = posts.slice(start, end);
+
+                    renderPosts(displayedPosts);
+                    generatePagination(totalPosts);
+                });
+        }
+
+        $(document).ready(function () {
+            getPosts();
+
+            $('.pagination').on('click', '.page', function () {
+                currentPage = parseInt($(this).text());
+                getPosts();
+            });
+
+            $('.pagination').on('click', '.prev', function () {
+                if (currentPage > 1) {
+                    currentPage--;
+                    getPosts();
+                }
+            });
+
+            $('.pagination').on('click', '.next', function () {
+                const totalPages = Math.ceil($('.pagination').children().length - 2);
+
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    getPosts();
+                }
+            });
+        });
+    </script>
 
 </body>
 

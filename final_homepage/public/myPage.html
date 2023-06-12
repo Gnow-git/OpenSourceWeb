@@ -6,17 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>myPage</title>
-    <script src="key.js"></script>
     <link rel="stylesheet" type="text/css" href="./style/header.css">
     <link rel="stylesheet" type="text/css" href="./style/myPage.css">
     <link rel="stylesheet" type="text/css" href="./style/footer.css">
     <script type="text/javascript" src="./script/myPage.js"></script>
 
-    <!-- 다른 html을 포함할때 사용-->
+    <!--jQuery-->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"
         integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 
-
+    <!-- 다른 html을 포함할때 사용-->
     <script type="text/javascript">
         $(document).ready(function () {
 
@@ -28,13 +27,11 @@
 </head>
 
 <body style="overflow-x: hidden" onLoad="showReviewSlides(); showBookMarkSlides();">
-    <div id="headers"></div>
     <div id="wrap">
-
-
+        <div id="headers"></div>
         <div class="myInformation">
             <img src="./image/myPage/profile.png">
-            <h4 id="name">닉네임</h4>
+            <h4 id="userName">닉네임</h4>
             <div id="button2"><a href="#">로그아웃</a></div>
         </div>
 
@@ -43,43 +40,8 @@
             var userinfo = localStorage.getItem('user')
             if (userinfo) {
                 userinfo = JSON.parse(userinfo);
-                $('#name').html(userinfo.displayName);
+                $('#userName').html(userinfo.displayName);
             }
-        </script>
-
-        <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
-
-        <script>
-            var firebaseConfig = {
-              apiKey: firebase_Key,
-              authDomain: firebase_authDomain,
-              projectId: firebase_projectId,
-              storageBucket: firebase_storageBucket,
-              messagingSenderId: firebase_messagingSenderId,
-              appId: firebase_appId,
-              measurementId: firebase_measurementId
-            };
-        
-            // Initialize Firebase
-            firebase.initializeApp(firebaseConfig);
-        
-          </script>
-
-        <script>
-            // 로그아웃 버튼 클릭 이벤트 핸들러
-            document.getElementById('button2').addEventListener('click', function () {
-                firebase.auth().signOut().then(function () {
-                    // 로그아웃 성공 시 처리할 코드
-                    console.log("로그아웃되었습니다.");
-                    // 여기에 로그아웃 성공 시 사용자에게 보여줄 액션 또는 화면 전환 등의 코드를 추가할 수 있습니다.
-                }).catch(function (error) {
-                    // 로그아웃 실패 시 처리할 코드
-                    console.log("로그아웃 실패:", error);
-                });
-            });
         </script>
         <hr>
         <h2 id="reviewH2">작성한 리뷰 목록</h2>
@@ -101,7 +63,7 @@
                     <hr>
                     <div class="rbottom">
                         <img src="./image/myPage/food1.jpg">
-                        <p>본인이 쓴 리뷰</p>
+                        <p>국물이 맛있어요</p>
                     </div>
                     <div class="button">
                         <div id="button1"><a href="#">리뷰 삭제</a></div>
@@ -122,7 +84,7 @@
                     <hr>
                     <div class="rbottom">
                         <img src="./image/myPage/food2.jpg">
-                        <p>본인이 쓴 리뷰</p>
+                        <p>고기가 맛있네요</p>
                     </div>
                     <div class="button">
                         <div id="button1"><a href="#">리뷰 삭제</a></div>
@@ -143,7 +105,7 @@
                     <hr>
                     <div class="rbottom">
                         <img src="./image/myPage/food3.jpeg">
-                        <p>본인이 쓴 리뷰</p>
+                        <p>돈카츠가 두툼해요</p>
                     </div>
                     <div class="button">
                         <div id="button1"><a href="#">리뷰 삭제</a></div>
@@ -166,7 +128,7 @@
                     <hr>
                     <div class="rbottom">
                         <img src="./image/myPage/food4.jpeg">
-                        <p>본인이 쓴 리뷰</p>
+                        <p>고기가 맛있네요</p>
                     </div>
                     <div class="button">
                         <div id="button1"><a href="#">리뷰 삭제</a></div>
@@ -187,7 +149,7 @@
                     <hr>
                     <div class="rbottom">
                         <img src="./image/myPage/food5.jpg">
-                        <p>본인이 쓴 리뷰</p>
+                        <p>면이 쫄깃해요</p>
                     </div>
                     <div class="button">
                         <div id="button1"><a href="#">리뷰 삭제</a></div>
@@ -208,7 +170,7 @@
                     <hr>
                     <div class="rbottom">
                         <img src="./image/myPage/food6.jpg">
-                        <p>본인이 쓴 리뷰</p>
+                        <p>진정한 소바 맛집</p>
                     </div>
                     <div class="button">
                         <div id="button1"><a href="#">리뷰 삭제</a></div>
@@ -231,7 +193,7 @@
                     <hr>
                     <div class="rbottom">
                         <img src="./image/myPage/food7.jpg">
-                        <p>본인이 쓴 리뷰</p>
+                        <p>단골이에요</p>
                     </div>
                     <div class="button">
                         <div id="button1"><a href="#">리뷰 삭제</a></div>
@@ -252,7 +214,7 @@
                     <hr>
                     <div class="rbottom">
                         <img src="./image/myPage/food8.jpg">
-                        <p>본인이 쓴 리뷰</p>
+                        <p>여름에 생각나는 맛</p>
                     </div>
                     <div class="button">
                         <div id="button1"><a href="#">리뷰 삭제</a></div>
@@ -273,7 +235,7 @@
                     <hr>
                     <div class="rbottom">
                         <img src="./image/myPage/food9.jpeg">
-                        <p>본인이 쓴 리뷰</p>
+                        <p>국물이 맛있어요</p>
                     </div>
                     <div class="button">
                         <div id="button1"><a href="#">리뷰 삭제</a></div>

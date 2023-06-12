@@ -19,7 +19,7 @@
     $(document).ready(function () {
 
       $("#headers").load("header.html");  // 원하는 파일 경로를 삽입하면 된다
-      //$("#footers").load("footer.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
+      $("#footers").load("footer.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
 
     });
   </script>
@@ -27,7 +27,7 @@
 
 <body>
 
-  <div id="headers"></div>
+  
 
   <!-- firebase용 코드 시작 -->
   <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
@@ -52,6 +52,9 @@
   </script>
   <!--firebase용 코드 끝-->
 
+  <div id="wrap">
+
+    <div id="headers"></div>
   <!-- 게시글 레이아웃 -->
   <div class="location_form form1">
     <div class="location_title title1">상당구</div>
@@ -82,17 +85,64 @@
     <img id="nextBtn2" src="./image/index/front_arrow.png">
   </div>
 
+  <script>
+    // 버튼 클릭 시 스크롤 이동
+    document.getElementById("backBtn2").addEventListener("click", function () {
+      var container = document.getElementById("location2"); // 스크롤을 적용할 컨테이너 요소
+      container.scrollLeft -= 100; // 스크롤 이동할 값(가로로 100px 이동하도록 설정)
+    });
+
+    // 버튼 클릭 시 스크롤 이동
+    document.getElementById("nextBtn2").addEventListener("click", function () {
+      var container = document.getElementById("location2"); // 스크롤을 적용할 컨테이너 요소
+      container.scrollLeft += 100; // 스크롤 이동할 값(가로로 100px 이동하도록 설정)
+    });
+
+  </script>
+
   <div class="location_form_3">
+    <div class="location_title2">흥덕구</div>
     <img id="backBtn3" src="./image/index/back_arrow.png">
     <div id="location3" class="palce_back"></div>
     <img id="nextBtn3" src="./image/index/front_arrow.png">
   </div>
 
+  <script>
+    // 버튼 클릭 시 스크롤 이동
+    document.getElementById("backBtn3").addEventListener("click", function () {
+      var container = document.getElementById("location3"); // 스크롤을 적용할 컨테이너 요소
+      container.scrollLeft -= 100; // 스크롤 이동할 값(가로로 100px 이동하도록 설정)
+    });
+
+    // 버튼 클릭 시 스크롤 이동
+    document.getElementById("nextBtn3").addEventListener("click", function () {
+      var container = document.getElementById("location3"); // 스크롤을 적용할 컨테이너 요소
+      container.scrollLeft += 100; // 스크롤 이동할 값(가로로 100px 이동하도록 설정)
+    });
+
+  </script>
+
   <div class="location_form_4">
+    <div class="location_title2">서원구</div>
     <img id="backBtn4" src="./image/index/back_arrow.png">
     <div id="location4" class="palce_back"></div>
     <img id="nextBtn4" src="./image/index/front_arrow.png">
   </div>
+
+  <script>
+    // 버튼 클릭 시 스크롤 이동
+    document.getElementById("backBtn4").addEventListener("click", function () {
+      var container = document.getElementById("location4"); // 스크롤을 적용할 컨테이너 요소
+      container.scrollLeft -= 100; // 스크롤 이동할 값(가로로 100px 이동하도록 설정)
+    });
+
+    // 버튼 클릭 시 스크롤 이동
+    document.getElementById("nextBtn4").addEventListener("click", function () {
+      var container = document.getElementById("location4"); // 스크롤을 적용할 컨테이너 요소
+      container.scrollLeft += 100; // 스크롤 이동할 값(가로로 100px 이동하도록 설정)
+    });
+
+  </script>
 
 
   <!--게시글 레이아웃-->
@@ -153,7 +203,7 @@
   </div>
   <div><button class="pick_btn review_btn_outline"><a href="pick.html"> 오늘 뭐먹어야할지 모르겠다면? </a></div>
   <div><button class="review_btn review_btn_outline"><a href="review.html"> 리뷰 작성하기 </a></div>
-
+  </div>
   <div id="footers"></div>
 </body>
 

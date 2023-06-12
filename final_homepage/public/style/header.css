@@ -32,6 +32,7 @@ header > a > .header_img{
   width:130px;
   height:80px;
   margin-right: 50px;
+  z-index: 1000;
 }
 
 
@@ -102,6 +103,7 @@ nav {
   height: 50px;
   padding-bottom: 0px;
   text-align: center;
+  z-index: 99;
 }
 
 

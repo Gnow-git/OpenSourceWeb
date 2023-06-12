@@ -19,6 +19,12 @@
     background-color:transparent; /* 투명하게 */
     text-align: center;
     border-top: 1px solid #000;
+    background-color: aliceblue;
+    height:50px;
+  }
+
+  .post_row{
+    height: 50px;
   }
 
   .post_head > th{
@@ -29,12 +35,21 @@
     text-align: center;
   }
 
+  .h_num{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .h_count{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
   /* 하단 번호 레이아웃 */
   .pagination {
     position: absolute;
     display: flex;
     list-style: none;
-    top: 150px;
+    top: 300px;
   }
   
   .pagination a {
