@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시물 상세 페이지</title>
+    <script src="key.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="style\notice_detail.css">
+    <!--jQuery-->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+
+    <!-- 다른 html을 포함할때 사용-->
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#headers").load("header.html");  // 원하는 파일 경로를 삽입하면 된다
+            $("#footers").load("footer.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
+
+        });
+    </script>
+</head>
+
+<body>
+
+    <div id="wrap">
+
+        <div id="headers"></div>
+        <div class="notice_detail_form">
+            <h1 id="post_title"></h1>
+            <p id="post_content"></p>
+        </div>
+
+    </div>
+    <div id="footers"></div>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: firebase_Key,
+            authDomain: firebase_authDomain,
+            projectId: firebase_projectId,
+            storageBucket: firebase_storageBucket,
+            messagingSenderId: firebase_messagingSenderId,
+            appId: firebase_appId,
+            measurementId: firebase_measurementId
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        const db = firebase.firestore();
+
+        // URL에서 게시물 ID 가져오기
+        const urlParams = new URLSearchParams(window.location.search);
+        const postId = urlParams.get('id');
+
+        // 게시물 가져오기
+        db.collection('post').doc(postId).get()
+            .then((doc) => {
+                if (doc.exists) {
+                    const post = doc.data();
+                    document.getElementById('post_title').innerText = post.제목;
+                    document.getElementById('post_content').innerText = post.내용;
+                } else {
+                    console.log("No such document!");
+                }
+            })
+            .catch((error) => {
+                console.error("Error getting document:", error);
+            });
+    </script>
+</body>
+
+</html>

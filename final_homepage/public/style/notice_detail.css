@@ -1,0 +1,80 @@
+/**로그인*/
+.notice_detail_form {
+    position: absolute;
+    width: 787px;
+    height: 693px;
+    left: 380px;
+    top: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 10;
+  }
+
+  #login_img{
+    width: 150px;
+    height: 90px
+  }
+
+  #login_title{
+    margin-top: 30px;
+    font-size:25px;
+    font-weight: bold;
+  }
+
+  hr{
+    width: 400px;
+    height: 1px;
+    border: 0px;
+    background:black;
+  }
+
+  #login_sub{
+    margin-top: 10px;
+    font-size:15px;
+    font-weight: bold;
+  }
+
+  .login_input{
+    width: 300px;
+    height: 40px;
+    font-size: 20px;
+    margin-top: 10px;
+    background: #FAFAFA;
+    border-style: none;
+  }
+
+  .login_input::placeholder {
+    padding-left: 20px;
+    font-size: 15px;
+    font-weight: bold;
+  }
+
+  .login_email{
+    margin-top: 40px;
+  }
+
+  .btn{
+    width: 300px;
+    height: 40px;
+    font-size: 15px;
+    color:#FAFAFA;
+    background: #322F2F;
+    margin: 10px;
+  }
+
+  #login{
+    margin-top: 20px;
+  }
+
+  #wrap{
+    min-height: 100%;
+    position: relative;
+  
+  }
+  
+  footer{
+    bottom: 0px;
+    position: absolute;
+    height: 10rem;
+  }
