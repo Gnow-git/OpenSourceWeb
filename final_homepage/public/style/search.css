@@ -74,4 +74,14 @@
     font-size: 13px;
   }
 
-  
+  #wrap{
+    min-height: 100%;
+    position: relative;
+
+}
+
+footer{
+    bottom: 0px;
+    position: absolute;
+    height: 10rem;
+}

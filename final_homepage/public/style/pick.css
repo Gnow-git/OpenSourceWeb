@@ -1,0 +1,68 @@
+/** 음식 추천 화면 css food_pick*/
+
+#food_pick {
+    position: absolute;
+    width: 720px;
+    height: 372px;
+    left: 50%;
+    top: 55%;
+    transform: translate(-50%, -50%);
+    background: #FFFFFF;
+    border: 3px solid #E5EEE4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -2;
+  }
+  
+  .food_pick_title {
+    position: absolute;
+    width: auto;
+    height: 48px;
+    left: 30%;
+    top: 31%;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 48px;
+    text-align: center;
+    color: #3F443F;
+    background-color: #FFFFFF;
+    z-index: -1;
+  }
+  
+  #food {
+    position: absolute;
+    width: auto;
+    height: 63px;
+    left: 50%;
+    top: 55%;
+    transform: translate(-50%, -50%);
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 61px;
+    text-align: center;
+    margin: 0;
+    color: rgba(0, 0, 0, 0.34);
+  }
+  
+  .pick_list{
+    position: absolute;
+    top:700px;
+    left: 45%;
+  }
+
+  #wrap{
+      min-height: 100%;
+      position: relative;
+  
+  }
+  
+  footer{
+      bottom: 0px;
+      position: absolute;
+      height: 10rem;
+  }
