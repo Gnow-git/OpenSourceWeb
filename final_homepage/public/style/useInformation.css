@@ -77,3 +77,15 @@ h4 {
     height: 250px;
     position: absolute;
 }
+
+#wrap{
+	min-height: 100%;
+	position: relative;
+
+}
+
+footer{
+	bottom: 0px;
+	position: absolute;
+	height: 10rem;
+}
